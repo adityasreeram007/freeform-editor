@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+.tab{
+position:absolute;
+left:30px;
+top:30px;
+width:30%;
+}
+.buttonlist{
+  text-align: center;
+}
+body{
+  background-color: #282c34;
+}
+.element{
+  display: flex;
+  width:100%;
+  margin-top: 30px;
+  font-size:xx-large;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  
+
+}
+[class^="element-"]{
+width:50%;
+}
+.flexbox{
+display: flex;
+
+flex-flow:row wrap;
+justify-content: space-around;
+}
+
+.flexitem{
+  margin-top: 7%;;
+}
+.area{
+  width:350px;
+  height:500px;
+background-color: white;
+}
