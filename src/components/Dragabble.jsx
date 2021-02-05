@@ -2,95 +2,95 @@ import { Component } from "react";
 
 var Dragabble=ComposedComponent => class  extends Component{
     state = {
-        isDragging: false,
+        Dragabble: false,
     
-        originalX: 0,
-        originalY: 0,
-    
-        translateX: 0,
-        translateY: 0,
-    
-        lastTranslateX: 0,
-        lastTranslateY: 0
+       startx:0,
+       starty:0,
+       endx:350,
+       endy:500,
+       x:170,
+       y:500
       };
     
       componentWillUnmount() {
-        window.removeEventListener('mousemove', this.handleMouseMove);
-        window.removeEventListener('mouseup', this.handleMouseUp);
+      
       }
-    
-      handleMouseDown = ({ clientX, clientY }) => {
-        console.log('mouse down')
-        window.addEventListener('mousemove', this.handleMouseMove);
-        window.addEventListener('mouseup', this.handleMouseUp);
-    
-        if (this.props.onDragStart) {
-          this.props.onDragStart();
-        }
-    
+      disableDragabble=()=>{
+        console.log("mouseup")
         this.setState({
-          originalX: clientX,
-          originalY: clientY,
-          isDragging: true
-        });
-      };
-    
-      handleMouseMove = ({ clientX, clientY }) => {
-        const { isDragging } = this.state;
-        const { onDrag } = this.props;
-    
-        if (!isDragging) {
-          return;
+          Dragabble:false
+        })
+      }
+      moveElement=(e)=>{
+        // console.log(e)
+        // console.log(this.state)
+        var blockpos=document.getElementById('area')
+        let deltaX = this.state.x - e.clientY
+        let deltaY = this.state.y - e.clientX
+        
+        let left= blockpos.left - deltaY 
+        let top = blockpos.top - deltaX 
+        if(this.state.Dragabble===true){
+          this.setState({x:top+50,y:left})
         }
+      }
+
+
+//       startMoving(){
+//         if(this.state.Dragabble==false){
+//           return 
+//         }
+      
+//       }
+//       moveUp=(e)=>{
+//         console.log(e)
+//       }
+//       moveDown=(e)=>{
+//         if(this.state.Dragabble===true){
+//         this.setState({x:e.clientX+5,y:e.clientY+5})
+      
+//       }
+// console.log(e)
+//       }
+      // handleMouseMove(){
+      //   if(this.state.Dragabble===true){
+
+      //   }
+        
+      // }
+    setDragabble=()=>{
+     
+        this.setState({
+        Dragabble:true
+      })
+     
+    }
     
-        this.setState(prevState => ({
-          translateX: clientX - prevState.originalX + prevState.lastTranslateX,
-          translateY: clientY - prevState.originalY + prevState.lastTranslateY
-        }), () => {
-          if (onDrag) {
-            onDrag({
-              translateX: this.state.translateX,
-              translateY: this.state.translateY
-            });
-          }
-        });
-      };
     
-      handleMouseUp = () => {
-        window.removeEventListener('mousemove', this.handleMouseMove);
-        window.removeEventListener('mouseup', this.handleMouseUp);
+  
     
-        this.setState(
-          {
-            originalX: 0,
-            originalY: 0,
-            lastTranslateX: this.state.translateX,
-            lastTranslateY: this.state.translateY,
-    
-            isDragging: false
-          },
-          () => {
-            if (this.props.onDragEnd) {
-              this.props.onDragEnd();
-            }
-          }
-        );
-      };
     
     render()
     {
-        console.log(111)
+        // console.log(111)
         const { children } = this.props;
     const { translateX, translateY, isDragging } = this.state;
-
+      var x=this.state.x+"px"
+      var y=this.state.y+"px"
+      var coords={
+        top:x,
+        left:y
+      }
+      console.log(coords)
         return (
-             <ComposedComponent onClick={()=>this.handleMouseDown}
-             x={translateX}
-             y={translateY}
-             isDragging={isDragging}
-             {...this.props} {...this.state} />
+
+          <div className="Dragger" onMouseDown={this.setDragabble} style={coords} onMouseOut={this.disableDragabble} onMouseMove={this.moveElement} onMouseUp={this.disableDragabble}  >
+             <ComposedComponent   {...this.state} {...this.props}
+             
+              />
+             </div>
         )
     }
-}
+} 
 
 export default Dragabble

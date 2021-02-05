@@ -58,6 +58,9 @@ body{
   
 
 }
+.Dragger{
+  position:absolute;
+}
 [class^="element-"]{
 width:50%;
 }

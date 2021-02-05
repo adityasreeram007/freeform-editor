@@ -1,15 +1,20 @@
-
+import React from 'react'
 import {Component} from 'react'
 import Rectangle from './Rectangle'
 import Image from './Image'
 import Text from './Text'
 import Button from './Button'
+import ReactDOM from 'react-dom'
 
 class Editor extends Component{
+    
     state={
-        elements:this.props.elements
+        elements:this.props.elements,
+      
     }
     renderElements=()=>{
+        
+        
         var elements=this.state.elements
         var tags=[]
         for (var element in elements){
@@ -35,7 +40,7 @@ class Editor extends Component{
     }
     render(){
         return (
-           <div className="area">
+           <div className="area" id="area">
 
             {this.renderElements()}
            </div>
