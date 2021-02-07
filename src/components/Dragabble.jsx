@@ -1,5 +1,5 @@
 import { Component } from "react";
-
+import Draggable from 'react-draggable';
 var Dragabble=ComposedComponent => class  extends Component{
     state = {
         Dragabble: false,
@@ -8,8 +8,8 @@ var Dragabble=ComposedComponent => class  extends Component{
        starty:0,
        endx:350,
        endy:500,
-       x:170,
-       y:500
+       x:0,
+       y:0
       };
     
       componentWillUnmount() {
@@ -24,14 +24,18 @@ var Dragabble=ComposedComponent => class  extends Component{
       moveElement=(e)=>{
         // console.log(e)
         // console.log(this.state)
-        var blockpos=document.getElementById('area')
-        let deltaX = this.state.x - e.clientY
-        let deltaY = this.state.y - e.clientX
+        var elem=document.getElementById('element-0')
+        // let deltaY = this.state.y - e.clientX
         
-        let left= blockpos.left - deltaY 
-        let top = blockpos.top - deltaX 
+        // console.log(blockpos)
+        // let left= blockpos.left - deltaY 
+        // let top = blockpos.top - deltaX 
+        console.log(e)
+        let shiftX = e.clientX - elem.getBoundingClientRect().left;
+        let shiftY = e.clientY - elem.getBoundingClientRect().top;
+        console.log(shiftY,shiftX)
         if(this.state.Dragabble===true){
-          this.setState({x:top+50,y:left})
+          this.setState({x:e.pageX+e.movementX*25,y:e.pageY+e.movementY*25})
         }
       }
 
@@ -84,11 +88,15 @@ var Dragabble=ComposedComponent => class  extends Component{
       console.log(coords)
         return (
 
-          <div className="Dragger" onMouseDown={this.setDragabble} style={coords} onMouseOut={this.disableDragabble} onMouseMove={this.moveElement} onMouseUp={this.disableDragabble}  >
+          <Draggable
+         
+         >
+            <div className="classes">
              <ComposedComponent   {...this.state} {...this.props}
              
-              />
-             </div>
+              /></div>
+              </Draggable>
+            
         )
     }
 } 
