@@ -5,11 +5,11 @@ class Image extends Component{
     render(){
         return (
             
-             
-            <img className={this.props.id} id={this.props.id} 
-            src='https://www.vinylhome.co.nz/image/cache/catalog/products/GreyMatte-500x500.jpg' 
-            height="200px" width="100px" />
-           
+             <div className="image">
+            <div className={this.props.id} id={this.props.id}> 
+            {this.props.id}
+          </div>
+           </div>
         )
 
         

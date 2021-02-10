@@ -10,7 +10,35 @@ class Editor extends Component{
     
     state={
         elements:this.props.elements,
+        verticalline:false,
+        horizontalline:false,
+        leftverticalline:true,
+        rightverticalline:true
       
+    }
+    showhorizontalline=()=>{
+        this.setState({
+            horizontalline:true,
+            
+          })
+    }
+    showverticalline=()=>{
+        this.setState({
+            verticalline:true,
+            
+          })
+    }
+    hidehorizontalline=()=>{
+        this.setState({
+            horizontalline:false,
+            
+          })
+    }
+    hideverticalline=()=>{
+        this.setState({
+            verticalline:false,
+            
+          })
     }
     renderElements=()=>{
         
@@ -20,18 +48,18 @@ class Editor extends Component{
         for (var element in elements){
 
             if(elements[element].type==="text"){
-                tags.push( <Text id={elements[element].id} />)
+                tags.push( <Text id={elements[element].id} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline}/>)
             }
             else if(elements[element].type==="image"){
-                tags.push(<Image id={elements[element].id} />)
+                tags.push(<Image id={elements[element].id}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline}/>)
 
             }
             else if(elements[element].type==="rectangle"){
-                tags.push(<Rectangle id={elements[element].id} />)
+                tags.push(<Rectangle id={elements[element].id}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline}/>)
 
             }
             else if(elements[element].type==="button"){
-                tags.push(<Button id={elements[element].id} />) 
+                tags.push(<Button id={elements[element].id}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline}/>) 
 
             }
         }
@@ -39,11 +67,27 @@ class Editor extends Component{
         return tags
     }
     render(){
-        return (
+        return (<>
+           
            <div className="area" id="area">
+
+               {this.state.verticalline?
+           <div className="verticalcenter"></div>:""}
+
+
+                {this.state.horizontalline?<div className="horizontalcenter">
+    
+</div>:""}
+{this.state.leftverticalline?<div className="leftvertical">
+    
+</div>:""}
+{this.state.rightverticalline?<div className="rightvertical">
+    
+</div>:""}
 
             {this.renderElements()}
            </div>
+           </>
         )
     }
 }

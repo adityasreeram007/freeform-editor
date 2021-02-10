@@ -62,7 +62,7 @@ body{
   position:absolute;
 }
 [class^="element-"]{
-width:50%;
+width:100%;
 }
 .flexbox{
 display: flex;
@@ -78,4 +78,71 @@ justify-content: space-around;
   width:350px;
   height:500px;
 background-color: white;
+}
+.image{
+  height:100px;
+  width:200px;
+  background-color: grey;
+ 
+}
+.setpos{
+ width:200px;
+  position:absolute;
+  margin: auto;
+  
+ 
+}
+.setpos:hover{
+  border:2px solid blue;
+}
+.leftline{
+
+  background-color: red;
+ position: absolute;
+ width:1px;
+ height:400px;
+}
+/* .rightline{
+  position: absolute;
+  border-right: 1px solid red;
+  height:400px;
+} */
+.topline{
+  background-color: red;
+  position: absolute;
+  height:1px;
+  width:400px;
+}
+/* .bottomline{
+  position: absolute;
+  border-bottom: 1px solid red;height:400px;
+} */
+
+.verticalcenter{
+  height:500px;
+  width:1px;
+  margin-left: 175px;;
+  position:absolute;
+  background-color: red;
+}
+.leftvertical{
+  height:500px;
+  width:1px;
+ margin-left:30px;
+  position:absolute;
+  background-color: red;
+}
+.rightvertical{
+  height:500px;
+  width:1px;
+ margin-left:38px;
+  position:absolute;
+  background-color: red;
+}
+.horizontalcenter{
+  height:1px;
+  width:350px;
+ margin-top: 249.5px;
+  position:absolute;
+  background-color: red;
 }
