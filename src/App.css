@@ -86,7 +86,7 @@ background-color: white;
  
 }
 .setpos{
- width:200px;
+
   position:absolute;
   margin: auto;
   
@@ -128,14 +128,21 @@ background-color: white;
 .leftvertical{
   height:500px;
   width:1px;
- margin-left:30px;
+ 
   position:absolute;
   background-color: red;
 }
 .rightvertical{
   height:500px;
   width:1px;
- margin-left:38px;
+
+  position:absolute;
+  background-color: red;
+}
+.centervertical{
+  height:500px;
+  width:1px;
+
   position:absolute;
   background-color: red;
 }

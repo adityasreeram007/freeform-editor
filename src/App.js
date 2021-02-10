@@ -9,31 +9,58 @@ class App extends Component{
     this.addelement=this.addelement.bind(this)
   }
   state={
-    elements:[]
+    elements:{}
 
 }
   addelement=(value)=>{
-    var elementid=this.state.elements.length
+    var count=0
+    for (var c in this.state.elements){
+            count+=1
+    }
+    var elementid=`element-${count}`
     var newlist=this.state.elements
-    newlist.push({
+    newlist[elementid]={
         type:value,
-        id:`element-${elementid}`
+        id:`element-${elementid}`,
+        x:70,
+        y:220,
+        offsetHeight:0,
+        offsetWidth:0
 
-    })
+    }
     this.setState({
         elements:newlist
     })
-    console.log(this.state)
+    // console.log(this.state)
 
 }
+setOffset=(elementid,width,height)=>{
+  var stateelements=this.state.elements
+    stateelements[elementid].offsetWidth=width
+    stateelements[elementid].offsetHeight=height
+    this.setState({
+      elements:stateelements
+    })
+  
+}
+  addcoords=(elementid,x,y)=>{
+    var stateelements=this.state.elements
+    stateelements[elementid]['x']=x
+    stateelements[elementid]['y']=y
+    this.setState({
+      elements:stateelements
+    })
+    // console.log("app state")
+    // console.log(this.state)
+  }
   render(){
     return (
       <div class="flexbox">
         <div classname="flexitem">
-      <ElementsTab addelement={this.addelement}/>
+      <ElementsTab addelement={this.addelement} />
       </div>
       <div className="flexitem">
-        <Editor elements={this.state.elements}/>
+        <Editor elements={this.state.elements} addcoords={this.addcoords} setOffset={this.setOffset}/>
       </div>
       
       </div>

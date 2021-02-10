@@ -12,9 +12,54 @@ class Editor extends Component{
         elements:this.props.elements,
         verticalline:false,
         horizontalline:false,
-        leftverticalline:true,
-        rightverticalline:true
+        leftverticalline:false,
+        rightverticalline:false,
+        centerline:false,
+        leftverticalx:0,
+        rightverticalx:0,
+        centerlinex:0
       
+    }
+    showleftverticalline=(x)=>{
+        this.setState({
+            leftverticalline:true,
+            leftverticalx:x
+            
+          })
+    }
+    showcenterline=(x)=>{
+        this.setState({
+            centerline:true,
+            centerlinex:x
+            
+          })
+    }
+    hidecenterline=()=>{
+        this.setState({
+            centerline:false,
+            
+          })
+
+    }
+    showrightverticalline=(x)=>{
+        this.setState({
+            rightverticalline:true,
+            rightverticalx:x
+            
+          })
+    }
+    hideleftverticalline=()=>{
+        this.setState({
+            leftverticalline:false,
+            
+          })
+
+    }
+    hiderightverticalline=()=>{
+        this.setState({
+            rightverticalline:false,
+            
+          })
     }
     showhorizontalline=()=>{
         this.setState({
@@ -40,30 +85,45 @@ class Editor extends Component{
             
           })
     }
+    // addcoords=(id,x,y)=>{
+    //     console.log('adcords')
+    //     console.log(this.props)
+    //     this.
+        
+
+    // }
     renderElements=()=>{
         
         
         var elements=this.state.elements
         var tags=[]
+        // console.log(elements)
         for (var element in elements){
 
             if(elements[element].type==="text"){
-                tags.push( <Text id={elements[element].id} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline}/>)
+                tags.push( <Text id={element} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+                    showleftverticalline={this.showleftverticalline}  showrightvertical={this.showrightverticalline} hiderightverticalline={this.hiderightverticalline} hideleftvertical={this.hideleftverticalline} elements={this.props.elements} setOffset={this.props.setOffset}
+                    showcenterline={this.showcenterline} hidecenterline={this.hidecenterline}
+                
+                />)
             }
             else if(elements[element].type==="image"){
-                tags.push(<Image id={elements[element].id}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline}/>)
+                tags.push(<Image id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords} 
+                    showleftverticalline={this.showleftverticalline} showcenterline={this.showcenterline} hidecenterline={this.hidecenterline} showrightvertical={this.showrightverticalline} hiderightverticalline={this.hiderightverticalline} hideleftvertical={this.hideleftverticalline} elements={this.props.elements} setOffset={this.props.setOffset}/>)
 
             }
             else if(elements[element].type==="rectangle"){
-                tags.push(<Rectangle id={elements[element].id}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline}/>)
+                tags.push(<Rectangle id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+                    showleftverticalline={this.showleftverticalline} showcenterline={this.showcenterline} hidecenterline={this.hidecenterline} showrightvertical={this.showrightverticalline} hiderightverticalline={this.hiderightverticalline} hideleftvertical={this.hideleftverticalline} elements={this.props.elements} setOffset={this.props.setOffset}/>)
 
             }
             else if(elements[element].type==="button"){
-                tags.push(<Button id={elements[element].id}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline}/>) 
+                tags.push(<Button id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+                    showleftverticalline={this.showleftverticalline} showcenterline={this.showcenterline} hidecenterline={this.hidecenterline} showrightvertical={this.showrightverticalline} hiderightverticalline={this.hiderightverticalline} hideleftvertical={this.hideleftverticalline} elements={this.props.elements} setOffset={this.props.setOffset}/>) 
 
             }
         }
-        console.log(tags)
+        // console.log(tags)
         return tags
     }
     render(){
@@ -72,16 +132,19 @@ class Editor extends Component{
            <div className="area" id="area">
 
                {this.state.verticalline?
-           <div className="verticalcenter"></div>:""}
+           <div className="verticalcenter" ></div>:""}
 
 
                 {this.state.horizontalline?<div className="horizontalcenter">
     
 </div>:""}
-{this.state.leftverticalline?<div className="leftvertical">
+{this.state.leftverticalline?<div className="leftvertical" style={{marginLeft:this.state.leftverticalx}}>
     
 </div>:""}
-{this.state.rightverticalline?<div className="rightvertical">
+{this.state.rightverticalline?<div className="rightvertical" style={{marginLeft:this.state.rightverticalx}}>
+    
+</div>:""}
+{this.state.centerline?<div className="centervertical" style={{marginLeft:this.state.centerlinex}}>
     
 </div>:""}
 
