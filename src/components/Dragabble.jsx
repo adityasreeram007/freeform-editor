@@ -1,13 +1,15 @@
 import { Component } from "react";
+import DraggableCore from 'react-draggable';
 import Draggable from 'react-draggable';
 var Dragabble=ComposedComponent => class  extends Component{
     state = {
-       x:0,
-       y:0,
+       x:70,
+       y:220,
        
       id:this.props.id,
       offsetHeight:0,
-      offsetWidth:0
+      offsetWidth:0,
+      scale:1
       
       };
     
@@ -20,63 +22,17 @@ var Dragabble=ComposedComponent => class  extends Component{
           Dragabble:false
         })
       }
-      // moveElement=(e)=>{
-      //   // console.log(e)
-      //   // console.log(this.state)
-      //   var elem=document.getElementById('element-0')
-      //   // let deltaY = this.state.y - e.clientX
-        
-      //   // console.log(blockpos)
-      //   // let left= blockpos.left - deltaY 
-      //   // let top = blockpos.top - deltaX 
-      //   console.log(e)
-      //   let shiftX = e.clientX - elem.getBoundingClientRect().left;
-      //   let shiftY = e.clientY - elem.getBoundingClientRect().top;
-      //   console.log(shiftY,shiftX)
-      //   if(this.state.Dragabble===true){
-      //     this.setState({x:e.pageX+e.movementX*25,y:e.pageY+e.movementY*25})
-      //   }
-      // }
 
-
-//       startMoving(){
-//         if(this.state.Dragabble==false){
-//           return 
-//         }
-      
-//       }
-//       moveUp=(e)=>{
-//         console.log(e)
-//       }
-//       moveDown=(e)=>{
-//         if(this.state.Dragabble===true){
-//         this.setState({x:e.clientX+5,y:e.clientY+5})
-      
-//       }
-// console.log(e)
-//       }
-      // handleMouseMove(){
-      //   if(this.state.Dragabble===true){
-
-      //   }
-        
-      // }
-    // setDragabble=()=>{
-     
-    //     this.setState({
-    //     Dragabble:true
-    //   })
-     
-    // }
     eventLogger = (e, data) => {
       // console.log('Event: ', e);
       // console.log('Data: ', data);
+      this.setState({scale:1})
       this.props.hidehorizontal()
       this.props.hidevertical()
       this.props.hideleftvertical()
       this.props.hiderightverticalline()
       this.props.hidecenterline()
-      if(parseInt(data.node.offsetWidth/2)+data.x>164 && parseInt(data.node.offsetWidth/2)+data.x<170){
+      if(parseInt(data.node.offsetWidth/2)+data.x>173 && parseInt(data.node.offsetWidth/2)+data.x<177){
         this.props.showvertical()}
         if(parseInt(data.node.offsetHeight/2)+data.y>248 && parseInt(data.node.offsetHeight/2)+data.y<256){
           this.props.showhorizontal()}
@@ -86,45 +42,100 @@ var Dragabble=ComposedComponent => class  extends Component{
        
          if(element!=this.state.id){
           console.log(this.props.elements[element])
-        if(this.props.elements[element].x>data.x-3 && this.props.elements[element].x<data.x+3){
+        if(this.props.elements[element].x>data.x-1 && this.props.elements[element].x<data.x+1)//left left
+        {
           this.props.showleftverticalline(data.x)
+          this.setState({
+            x:data.x
+          
+          })
+
+        }
+        if(this.props.elements[element].x+this.props.elements[element].offsetWidth>data.x-1 && this.props.elements[element].x+this.props.elements[element].offsetWidth<data.x+1)//left right
+        {
+          this.props.showleftverticalline(data.x)
+          this.setState({
+            x:data.x
+          })
+
+        }
+        if(this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)>data.x-1 && this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)<data.x+1)//left center
+        {
+          this.props.showcenterline(data.x)
+          this.setState({
+            x:data.x
+          })
 
         }
         // console.log("rightvertical")
         // console.log(this.props.elements[element].x+this.props.elements[element].offsetWidth,data.x+data.node.offsetWidth)
-        if(this.props.elements[element].x+this.props.elements[element].offsetWidth>data.x+data.node.offsetWidth-3 && this.props.elements[element].x+this.props.elements[element].offsetWidth<data.x+data.node.offsetWidth+3  && data.x+data.node.offsetWidth<350 ){
+        if(this.props.elements[element].x+this.props.elements[element].offsetWidth>data.x+data.node.offsetWidth-1 && this.props.elements[element].x+this.props.elements[element].offsetWidth<data.x+data.node.offsetWidth+1   )//right right
+        {
           this.props.showrightvertical(data.x+data.node.offsetWidth)
+          this.setState({
+            x:data.x+data.node.offsetWidth
+          })
+          console.log("leftleft")
+          console.log(this.state)
 
         }
-        if(this.props.elements[element].x+this.props.elements[element].offsetWidth>data.x-3 && this.props.elements[element].x+this.props.elements[element].offsetWidth<data.x+3 && data.x+data.node.offsetWidth<350){
+        if(this.props.elements[element].x>data.x+data.node.offsetWidth-1 && this.props.elements[element].x<data.x+data.node.offsetWidth+1 )//right left
+        {
           this.props.showrightvertical(data.x+data.node.offsetWidth)
+          this.setState({
+            x:data.x+data.node.offsetWidth
+          })
 
         }
-        if(this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)===data.x+(data.node.offsetWidth)/2){
+        if(this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)>data.x+data.node.offsetWidth-1 && this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)<data.x+data.node.offsetWidth+1 )//right center
+        {
+          this.props.showcenterline(data.x+data.node.offsetWidth)
+          this.setState({
+            x:parseInt(data.x+data.node.offsetWidth)
+          })
+
+        }
+        if(this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)===data.x+(data.node.offsetWidth)/2)//center
+        {
           console.log('centers')
           console.log(this.props.elements[element].x+this.props.elements[element].offsetWidth,data.x+data.node.offsetWidth)
           this.props.showcenterline(data.x+(data.node.offsetWidth/2))
+          this.setState({
+            x:parseInt(data.x+(data.node.offsetWidth/2))
+          })
+          
 
         }
-        if(data.x>=173 && data.x<179){
+        if(data.x>=173 && data.x<179)//left center
+        {
           this.props.showcenterline(175)
+          this.setState({
+            x:175
+          })
+          
 
         }
-        if(data.x+data.node.offsetWidth>=173 && data.x+data.node.offsetWidth<=179){
+        if(data.x+data.node.offsetWidth>=173 && data.x+data.node.offsetWidth<=179)//right center
+        {
           this.props.showcenterline(175)
+          this.setState({
+            x:175
+          })
         }
       }
         
       
       }
   
-
-      
-      
       this.setState({
-        x:data.x,
-        y:data.y
-      })
+          x:data.x,
+          y:data.y
+        }) 
+        
+      
+      
+      
+
     };
     stopdrag=()=>{
       this.props.hidehorizontal()
@@ -160,11 +171,12 @@ var Dragabble=ComposedComponent => class  extends Component{
 
           <Draggable
           defaultPosition={{x:70,y:220}}
+          position={{x:this.state.x,y:this.state.y}}
           onStart={this.setOffset}
           onDrag={this.eventLogger}
           onStop={this.stopdrag}
           bounds={{left:0,right:230,top:0,bottom:480}}
-          scale={1}
+          scale={this.state.scale}
           
          
          >
@@ -183,3 +195,12 @@ var Dragabble=ComposedComponent => class  extends Component{
 } 
 
 export default Dragabble
+
+
+
+
+
+
+
+
+
