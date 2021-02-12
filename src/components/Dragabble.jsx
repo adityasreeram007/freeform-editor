@@ -102,7 +102,7 @@ var Dragabble=ComposedComponent => class  extends Component{
           // })
 
         }
-        if(!leftv){
+        
         if(this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)>data.x+data.node.offsetWidth-5 && this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)<data.x+data.node.offsetWidth+5 )//right center
         {
           xdata= this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)-data.node.offsetWidth
@@ -115,11 +115,11 @@ var Dragabble=ComposedComponent => class  extends Component{
           //   x:parseInt(data.x+data.node.offsetWidth)
           // })
 
-        }}
+        }
         
-        if(this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)===data.x+(data.node.offsetWidth)/2)//center
+        if(this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)>(data.x+(data.node.offsetWidth)/2)-2 &&this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)<(data.x+(data.node.offsetWidth)/2)+2)//center
         {
-          xdata= this.props.elements[element].x
+          xdata= this.props.elements[element].x+(this.props.elements[element].offsetWidth)/2-(data.node.offsetWidth/2)
           ydata=data.y
           centerv=true
           centerx=this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)
@@ -144,6 +144,7 @@ var Dragabble=ComposedComponent => class  extends Component{
           centerx=175
 
         }
+        
         if(data.x+data.node.offsetWidth>=173 && data.x+data.node.offsetWidth<=179)//right center
         {
           xdata=175-data.node.offsetWidth

@@ -24,7 +24,10 @@ class Editor extends Component{
                this.setState({
             leftverticalline:false,
             rightverticalline:false,
-            centerline:false
+            centerline:false,
+            leftverticalx:0,
+            rightverticalx:0,
+            centerlinex:0
             
           })
     }
