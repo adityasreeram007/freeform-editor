@@ -20,47 +20,68 @@ class Editor extends Component{
         centerlinex:0
       
     }
-    showleftverticalline=(x)=>{
-        this.setState({
-            leftverticalline:true,
-            leftverticalx:x
-            
-          })
-    }
-    showcenterline=(x)=>{
-        this.setState({
-            centerline:true,
-            centerlinex:x
-            
-          })
-    }
-    hidecenterline=()=>{
-        this.setState({
-            centerline:false,
-            
-          })
-
-    }
-    showrightverticalline=(x)=>{
-        this.setState({
-            rightverticalline:true,
-            rightverticalx:x
-            
-          })
-    }
-    hideleftverticalline=()=>{
-        this.setState({
+    hidelines=()=>{
+               this.setState({
             leftverticalline:false,
+            rightverticalline:false,
+            centerline:false
             
           })
+    }
+    showlines=(leftv,centerv,rightv,leftx,centerx,rightx)=>{
+        console.log("centers asda")
+        console.log(leftv,centerv,rightv,leftx,centerx,rightx)
+        this.setState({
+            leftverticalline:leftv,
+            rightverticalline:rightv,
+            centerline:centerv,
+            leftverticalx:leftx,
+            rightverticalx:rightx,
+            centerlinex:centerx
+        })
 
     }
-    hiderightverticalline=()=>{
-        this.setState({
-            rightverticalline:false,
+    // showleftverticalline=(x)=>{
+    //     this.setState({
+    //         leftverticalline:true,
+    //         leftverticalx:x
             
-          })
-    }
+    //       })
+    // }
+    // showcenterline=(x)=>{
+    //     this.setState({
+    //         centerline:true,
+    //         centerlinex:x
+            
+    //       })
+    // }
+    // hidecenterline=()=>{
+    //     this.setState({
+    //         centerline:false,
+            
+    //       })
+
+    // }
+    // showrightverticalline=(x)=>{
+    //     this.setState({
+    //         rightverticalline:true,
+    //         rightverticalx:x
+            
+    //       })
+    // }
+    // hideleftverticalline=()=>{
+    //     this.setState({
+    //         leftverticalline:false,
+            
+    //       })
+
+    // }
+    // hiderightverticalline=()=>{
+    //     this.setState({
+    //         rightverticalline:false,
+            
+    //       })
+    // }
     showhorizontalline=()=>{
         this.setState({
             horizontalline:true,
@@ -102,24 +123,23 @@ class Editor extends Component{
 
             if(elements[element].type==="text"){
                 tags.push( <Text id={element} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
-                    showleftverticalline={this.showleftverticalline}  showrightvertical={this.showrightverticalline} hiderightverticalline={this.hiderightverticalline} hideleftvertical={this.hideleftverticalline} elements={this.props.elements} setOffset={this.props.setOffset}
-                    showcenterline={this.showcenterline} hidecenterline={this.hidecenterline}
+                   setOffset={this.props.setOffset} elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines}
                 
                 />)
             }
             else if(elements[element].type==="image"){
                 tags.push(<Image id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords} 
-                    showleftverticalline={this.showleftverticalline} showcenterline={this.showcenterline} hidecenterline={this.hidecenterline} showrightvertical={this.showrightverticalline} hiderightverticalline={this.hiderightverticalline} hideleftvertical={this.hideleftverticalline} elements={this.props.elements} setOffset={this.props.setOffset}/>)
+                    setOffset={this.props.setOffset}  elements={this.props.elements}   showlines={this.showlines} hidelines={this.hidelines}/>)
 
             }
             else if(elements[element].type==="rectangle"){
                 tags.push(<Rectangle id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
-                    showleftverticalline={this.showleftverticalline} showcenterline={this.showcenterline} hidecenterline={this.hidecenterline} showrightvertical={this.showrightverticalline} hiderightverticalline={this.hiderightverticalline} hideleftvertical={this.hideleftverticalline} elements={this.props.elements} setOffset={this.props.setOffset}/>)
+                    setOffset={this.props.setOffset}   elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines}/>)
 
             }
             else if(elements[element].type==="button"){
                 tags.push(<Button id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
-                    showleftverticalline={this.showleftverticalline} showcenterline={this.showcenterline} hidecenterline={this.hidecenterline} showrightvertical={this.showrightverticalline} hiderightverticalline={this.hiderightverticalline} hideleftvertical={this.hideleftverticalline} elements={this.props.elements} setOffset={this.props.setOffset}/>) 
+                    setOffset={this.props.setOffset}  elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines}/>) 
 
             }
         }

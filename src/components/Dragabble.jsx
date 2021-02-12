@@ -9,7 +9,7 @@ var Dragabble=ComposedComponent => class  extends Component{
       id:this.props.id,
       offsetHeight:0,
       offsetWidth:0,
-      scale:1
+      axis:"both"
       
       };
     
@@ -29,110 +29,148 @@ var Dragabble=ComposedComponent => class  extends Component{
       this.setState({scale:1})
       this.props.hidehorizontal()
       this.props.hidevertical()
-      this.props.hideleftvertical()
-      this.props.hiderightverticalline()
-      this.props.hidecenterline()
+     this.props.hidelines()
       if(parseInt(data.node.offsetWidth/2)+data.x>173 && parseInt(data.node.offsetWidth/2)+data.x<177){
         this.props.showvertical()}
         if(parseInt(data.node.offsetHeight/2)+data.y>248 && parseInt(data.node.offsetHeight/2)+data.y<256){
           this.props.showhorizontal()}
           // console.log("propsss")
           // console.log(this.props.elements)
+        var xdata=data.x;
+          var leftv=false
+          var rightv=false
+          var centerv=false
+          var leftx=0
+          var rightx=0
+          var centerx=0
+        var ydata=data.y
+        console.log(this.props.elements)
       for (var element in this.props.elements){
-       
+        console.log("events")
+        console.log(this.props.elements[element],data.x)
          if(element!=this.state.id){
           console.log(this.props.elements[element])
-        if(this.props.elements[element].x>data.x-1 && this.props.elements[element].x<data.x+1)//left left
+        if(this.props.elements[element].x>data.x-5 && this.props.elements[element].x<data.x+5)//left left
         {
-          this.props.showleftverticalline(data.x)
-          this.setState({
-            x:data.x
-          
-          })
+         xdata=this.props.elements[element].x
+         ydata=data.y
+        leftv=true
+        leftx=this.props.elements[element].x
 
         }
-        if(this.props.elements[element].x+this.props.elements[element].offsetWidth>data.x-1 && this.props.elements[element].x+this.props.elements[element].offsetWidth<data.x+1)//left right
+        if(this.props.elements[element].x+this.props.elements[element].offsetWidth>data.x-5 && this.props.elements[element].x+this.props.elements[element].offsetWidth<data.x+5)//left right
         {
-          this.props.showleftverticalline(data.x)
-          this.setState({
-            x:data.x
-          })
+         xdata=this.props.elements[element].x+this.props.elements[element].offsetWidth
+         ydata=data.y
+         leftv=true
+         leftx=this.props.elements[element].x+this.props.elements[element].offsetWidth
 
         }
-        if(this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)>data.x-1 && this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)<data.x+1)//left center
+        if(this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)>data.x-5 && this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)<data.x+5)//left center
         {
-          this.props.showcenterline(data.x)
-          this.setState({
-            x:data.x
-          })
+          xdata=this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)
+          ydata=data.y
+          leftv=true
+          leftx=this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)
 
         }
         // console.log("rightvertical")
         // console.log(this.props.elements[element].x+this.props.elements[element].offsetWidth,data.x+data.node.offsetWidth)
-        if(this.props.elements[element].x+this.props.elements[element].offsetWidth>data.x+data.node.offsetWidth-1 && this.props.elements[element].x+this.props.elements[element].offsetWidth<data.x+data.node.offsetWidth+1   )//right right
+        if(this.props.elements[element].x+this.props.elements[element].offsetWidth>data.x+data.node.offsetWidth-5 && this.props.elements[element].x+this.props.elements[element].offsetWidth<data.x+data.node.offsetWidth+5   )//right right
         {
-          this.props.showrightvertical(data.x+data.node.offsetWidth)
-          this.setState({
-            x:data.x+data.node.offsetWidth
-          })
-          console.log("leftleft")
-          console.log(this.state)
+          xdata=this.props.elements[element].x+this.props.elements[element].offsetWidth-data.node.offsetWidth
+          ydata=data.y
+          rightv=true
+          rightx=this.props.elements[element].x+this.props.elements[element].offsetWidth
+          // this.props.showrightvertical(data.x+data.node.offsetWidth)
+          // this.setState({
+          //   x:data.x+data.node.offsetWidth
+          // })
+          // console.log("leftleft")
+          // console.log(this.state)
 
         }
-        if(this.props.elements[element].x>data.x+data.node.offsetWidth-1 && this.props.elements[element].x<data.x+data.node.offsetWidth+1 )//right left
+        if(this.props.elements[element].x>data.x+data.node.offsetWidth-5 && this.props.elements[element].x<data.x+data.node.offsetWidth+5 )//right left
         {
-          this.props.showrightvertical(data.x+data.node.offsetWidth)
-          this.setState({
-            x:data.x+data.node.offsetWidth
-          })
+          xdata= this.props.elements[element].x-data.node.offsetWidth
+          ydata=data.y
+          rightv=true
+          rightx=this.props.elements[element].x
+          // this.props.showrightvertical(data.x+data.node.offsetWidth)
+          // this.setState({
+          //   x:data.x+data.node.offsetWidth
+          // })
 
         }
-        if(this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)>data.x+data.node.offsetWidth-1 && this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)<data.x+data.node.offsetWidth+1 )//right center
+        if(!leftv){
+        if(this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)>data.x+data.node.offsetWidth-5 && this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)<data.x+data.node.offsetWidth+5 )//right center
         {
-          this.props.showcenterline(data.x+data.node.offsetWidth)
-          this.setState({
-            x:parseInt(data.x+data.node.offsetWidth)
-          })
+          xdata= this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)-data.node.offsetWidth
+          ydata=data.y
+          rightv=true
 
-        }
+          rightx=this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)
+          // this.props.showcenterline(data.x+data.node.offsetWidth)
+          // this.setState({
+          //   x:parseInt(data.x+data.node.offsetWidth)
+          // })
+
+        }}
+        
         if(this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)===data.x+(data.node.offsetWidth)/2)//center
         {
-          console.log('centers')
-          console.log(this.props.elements[element].x+this.props.elements[element].offsetWidth,data.x+data.node.offsetWidth)
-          this.props.showcenterline(data.x+(data.node.offsetWidth/2))
-          this.setState({
-            x:parseInt(data.x+(data.node.offsetWidth/2))
-          })
+          xdata= this.props.elements[element].x
+          ydata=data.y
+          centerv=true
+          centerx=this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)
+          // console.log('centers')
+          // console.log(this.props.elements[element].x+this.props.elements[element].offsetWidth,data.x+data.node.offsetWidth)
+          // this.props.showcenterline(data.x+(data.node.offsetWidth/2))
+          // this.setState({
+          //   x:parseInt(data.x+(data.node.offsetWidth/2))
+          // })
           
 
         }
         if(data.x>=173 && data.x<179)//left center
         {
-          this.props.showcenterline(175)
-          this.setState({
-            x:175
-          })
-          
+          xdata=175
+          ydata=data.y
+          // this.props.showcenterline(175)
+          // this.setState({
+          //   x:175
+          // })
+          centerv=true
+          centerx=175
 
         }
         if(data.x+data.node.offsetWidth>=173 && data.x+data.node.offsetWidth<=179)//right center
         {
-          this.props.showcenterline(175)
-          this.setState({
-            x:175
-          })
+          xdata=175-data.node.offsetWidth
+          ydata=data.y
+          // this.props.showcenterline(175)
+          // this.setState({
+          //   x:175
+          // })
+          centerv=true
+          centerx=175
         }
       }
         
       
       }
-  
+      var axis="both"
+      if(leftv===true || centerv===true || rightv===true){
+        axis="none"
+      }
       this.setState({
-          x:data.x,
-          y:data.y
+          x:xdata,
+          y:ydata,
+          axis:axis
+          
         }) 
         
-      
+      this.props.showlines(leftv,centerv,rightv,leftx,centerx,rightx)
       
       
 
@@ -140,15 +178,19 @@ var Dragabble=ComposedComponent => class  extends Component{
     stopdrag=()=>{
       this.props.hidehorizontal()
       this.props.hidevertical()
-      this.props.hiderightverticalline()
-      this.props.hideleftvertical()
-      this.props.hidecenterline()
+      // this.props.hiderightverticalline()
+      // this.props.hideleftvertical()
+      // this.props.hidecenterline()
       // console.log(this.props)
+      this.props.hidelines()
       this.props.addcoords(this.state.id,this.state.x,this.state.y,this.state.offsetHeight,this.state.offsetWidth)
     }
     
     setOffset=(e,data)=>{
       // console.log(data)
+      this.setState({
+        axis:"both"
+      })
       this.props.setOffset(this.state.id,data.node.offsetWidth,data.node.offsetHeight)
       
 
@@ -170,7 +212,7 @@ var Dragabble=ComposedComponent => class  extends Component{
         return (
 
           <Draggable
-          defaultPosition={{x:70,y:220}}
+          axis={this.state.axis}
           position={{x:this.state.x,y:this.state.y}}
           onStart={this.setOffset}
           onDrag={this.eventLogger}
