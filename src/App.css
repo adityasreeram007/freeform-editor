@@ -93,7 +93,9 @@ background-color: white;
  
 }
 .setpos:hover{
-  border:2px solid blue;
+  
+  outline:1px solid blue;
+  /* box-sizing: border-box; */
 }
 .leftline{
 

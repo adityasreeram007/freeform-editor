@@ -9,7 +9,8 @@ class App extends Component{
     this.addelement=this.addelement.bind(this)
   }
   state={
-    elements:{}
+    elements:{},
+    maxindex:0
 
 }
   addelement=(value)=>{
@@ -25,7 +26,8 @@ class App extends Component{
         x:70,
         y:220,
         offsetHeight:0,
-        offsetWidth:0
+        offsetWidth:0,
+        zindex:0
 
     }
     this.setState({
@@ -34,13 +36,26 @@ class App extends Component{
     // console.log(this.state)
 
 }
-setOffset=(elementid,width,height)=>{
+setOffset=(elementid,width,height,zindex)=>{
   var stateelements=this.state.elements
     stateelements[elementid].offsetWidth=width
     stateelements[elementid].offsetHeight=height
-    this.setState({
-      elements:stateelements
-    })
+    stateelements[elementid].zindex=zindex
+    if(this.state.maxindex<zindex){
+      this.setState({
+        elements:stateelements,
+        maxindex:zindex+1
+      
+      })
+    }
+    else{
+      this.setState({
+        elements:stateelements,
+       
+      
+      })
+    }
+    
   
 }
   addcoords=(elementid,x,y)=>{
@@ -60,7 +75,7 @@ setOffset=(elementid,width,height)=>{
       <ElementsTab addelement={this.addelement} />
       </div>
       <div className="flexitem">
-        <Editor elements={this.state.elements} addcoords={this.addcoords} setOffset={this.setOffset}/>
+        <Editor elements={this.state.elements} addcoords={this.addcoords} setOffset={this.setOffset} maxindex={this.state.maxindex}/>
       </div>
       
       </div>

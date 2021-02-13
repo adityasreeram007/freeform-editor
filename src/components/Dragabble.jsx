@@ -9,7 +9,9 @@ var Dragabble=ComposedComponent => class  extends Component{
       id:this.props.id,
       offsetHeight:0,
       offsetWidth:0,
-      axis:"both"
+      axis:"both",
+      zindex:0,
+      max:this.props.maxindex
       
       };
     
@@ -117,7 +119,7 @@ var Dragabble=ComposedComponent => class  extends Component{
 
         }
         
-        if(this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)>(data.x+(data.node.offsetWidth)/2)-2 &&this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)<(data.x+(data.node.offsetWidth)/2)+2)//center
+        if(this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)>(data.x+(data.node.offsetWidth)/2)-5 &&this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)<(data.x+(data.node.offsetWidth)/2)+5)//center
         {
           xdata= this.props.elements[element].x+(this.props.elements[element].offsetWidth)/2-(data.node.offsetWidth/2)
           ydata=data.y
@@ -156,6 +158,26 @@ var Dragabble=ComposedComponent => class  extends Component{
           centerv=true
           centerx=175
         }
+        if(data.x+(data.node.offsetWidth/2)>this.props.elements[element].x-5 && data.x+(data.node.offsetWidth/2)<this.props.elements[element].x+5){
+          xdata=this.props.elements[element].x-(data.node.offsetWidth/2)
+          ydata=data.y
+          // this.props.showcenterline(175)
+          // this.setState({
+          //   x:175
+          // })
+          centerv=true
+          centerx=this.props.elements[element].x
+        }
+        if(data.x+(data.node.offsetWidth/2)>this.props.elements[element].x+this.props.elements[element].offsetWidth-5 && data.x+(data.node.offsetWidth/2)<this.props.elements[element].x+this.props.elements[element].offsetWidth+5){
+          xdata=this.props.elements[element].x+this.props.elements[element].offsetWidth-(data.node.offsetWidth/2)
+          ydata=data.y
+          // this.props.showcenterline(175)
+          // this.setState({
+          //   x:175
+          // })
+          centerv=true
+          centerx=this.props.elements[element].x+this.props.elements[element].offsetWidth
+        }
       }
         
       
@@ -188,11 +210,14 @@ var Dragabble=ComposedComponent => class  extends Component{
     }
     
     setOffset=(e,data)=>{
-      // console.log(data)
+     
       this.setState({
-        axis:"both"
+        axis:"both",
+        zindex:this.state.max+1,
+        
       })
-      this.props.setOffset(this.state.id,data.node.offsetWidth,data.node.offsetHeight)
+      console.log("zind "+this.state.zindex,this.props.maxindex)
+      this.props.setOffset(this.state.id,data.node.offsetWidth,data.node.offsetHeight,this.state.max+1)
       
 
     }
@@ -200,7 +225,7 @@ var Dragabble=ComposedComponent => class  extends Component{
     
     render()
     {
-        // console.log(111)
+      
         const { children } = this.props;
     const { translateX, translateY, isDragging } = this.state;
       var x=this.state.x+"px"
@@ -223,7 +248,7 @@ var Dragabble=ComposedComponent => class  extends Component{
           
          
          >
-            <div className="setpos">
+            <div className="setpos" style={{zIndex:this.state.zindex}}>
             
               
               
