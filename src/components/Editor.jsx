@@ -118,6 +118,12 @@ class Editor extends Component{
         
 
     // }
+    goback=()=>{
+        this.props.setZindex("backward",this.state.selected)
+    }
+    gofront=()=>{
+        this.props.setZindex("forward",this.state.selected)
+    }
     selectElement=(elementid)=>{
         console.log("element id "+elementid)
         this.setState({
@@ -134,23 +140,23 @@ class Editor extends Component{
 
             if(elements[element].type==="text"){
                 tags.push( <Text id={element} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
-                   setOffset={this.props.setOffset} elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement}
+                   setOffset={this.props.setOffset} elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
                 
                 />)
             }
             else if(elements[element].type==="image"){
                 tags.push(<Image id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords} 
-                    setOffset={this.props.setOffset}  elements={this.props.elements}   showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement}/>)
+                    setOffset={this.props.setOffset}  elements={this.props.elements}   showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}/>)
 
             }
             else if(elements[element].type==="rectangle"){
                 tags.push(<Rectangle id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
-                    setOffset={this.props.setOffset}   elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement}/>)
+                    setOffset={this.props.setOffset}   elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}/>)
 
             }
             else if(elements[element].type==="button"){
                 tags.push(<Button id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
-                    setOffset={this.props.setOffset}  elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement}/>) 
+                    setOffset={this.props.setOffset}  elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}/>) 
 
             }
         }
@@ -183,8 +189,8 @@ class Editor extends Component{
            </div>
            <div className="selected">
                <h2> Element Selected <br/>{this.state.selected}</h2>
-               <button className="frontbackbuttons">Go back</button>
-               <button className="frontbackbuttons">bring front</button>
+               <button className="frontbackbuttons" onClick={this.goback}>Go back</button>
+               <button className="frontbackbuttons" onClick={this.gofront}>bring front</button>
            </div>
            </>
         )

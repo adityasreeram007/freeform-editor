@@ -1,23 +1,40 @@
 import { Component } from "react";
 import DraggableCore from 'react-draggable';
 import Draggable from 'react-draggable';
+import React from 'react'
 var Dragabble=ComposedComponent => class  extends Component{
-    state = {
-       x:70,
-       y:220,
-       
-      id:this.props.id,
-      offsetHeight:0,
-      offsetWidth:0,
-      axis:"both",
-      zindex:this.props.maxindex+1,
-      max:this.props.maxindex
-      
-      };
+
+  
+  constructor(props){
+    super(props)
+    this.myInput = React.createRef()
+  }
+
+  state = {
+    x:70,
+    y:220,
     
-      componentWillUnmount() {
-      
+   id:this.props.id,
+   offsetHeight:0,
+   offsetWidth:0,
+   axis:"both",
+   zindex:this.props.elements[this.props.id].zindex+1,
+   max:this.props.maxindex
+   
+   };
+    
+      componentDidMount() {
+        this.props.setInitialOffset(this.props.id,this.myInput.current.offsetWidth,this.myInput.current.offsetHeight)
+        
       }
+      componentDidUpdate(){
+        console.log(this.props.elements)
+        if(this.state.zindex!=this.props.elements[this.props.id].zindex){
+        this.setState({
+          zindex:this.props.elements[this.props.id].zindex
+        })}
+      }
+    
       disableDragabble=()=>{
        // console.log("mouseup")
         this.setState({
@@ -250,7 +267,7 @@ var Dragabble=ComposedComponent => class  extends Component{
           
          
          >
-            <div className="setpos" onClick={this.selectElement} style={{zIndex:this.state.zindex}}>
+            <div className="setpos"  ref={this.myInput} onClick={this.selectElement} style={{zIndex:this.state.zindex}}>
             
               
               
