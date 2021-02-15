@@ -221,7 +221,9 @@ var Dragabble=ComposedComponent => class  extends Component{
       
 
     }
-    
+    selectElement=()=>{
+      this.props.selectElement(this.state.id)
+    }
     
     render()
     {
@@ -248,7 +250,7 @@ var Dragabble=ComposedComponent => class  extends Component{
           
          
          >
-            <div className="setpos" style={{zIndex:this.state.zindex}}>
+            <div className="setpos" onClick={this.selectElement} style={{zIndex:this.state.zindex}}>
             
               
               

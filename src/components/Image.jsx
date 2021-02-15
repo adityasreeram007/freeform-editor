@@ -6,7 +6,7 @@ class Image extends Component{
         return (
             
              <div className="image">
-            <div className={this.props.id} id={this.props.id}> 
+            <div className={this.props.id} id={this.props.id} Style={{zIndex:this.props.maxindex+1}}> 
             {this.props.id}
           </div>
            </div>
