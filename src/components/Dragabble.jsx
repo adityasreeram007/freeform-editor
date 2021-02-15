@@ -10,7 +10,7 @@ var Dragabble=ComposedComponent => class  extends Component{
       offsetHeight:0,
       offsetWidth:0,
       axis:"both",
-      zindex:0,
+      zindex:this.props.maxindex+1,
       max:this.props.maxindex
       
       };
