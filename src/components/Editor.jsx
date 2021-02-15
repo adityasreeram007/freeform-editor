@@ -17,7 +17,8 @@ class Editor extends Component{
         centerline:false,
         leftverticalx:0,
         rightverticalx:0,
-        centerlinex:0
+        centerlinex:0,
+        selected:"element -1"
        
       
     }
@@ -33,8 +34,8 @@ class Editor extends Component{
           })
     }
     showlines=(leftv,centerv,rightv,leftx,centerx,rightx)=>{
-        console.log("centers asda")
-        console.log(leftv,centerv,rightv,leftx,centerx,rightx)
+     //   console.log("centers asda")
+     //   console.log(leftv,centerv,rightv,leftx,centerx,rightx)
         this.setState({
             leftverticalline:leftv,
             rightverticalline:rightv,
@@ -173,6 +174,11 @@ class Editor extends Component{
 </div>:""}
 
             {this.renderElements()}
+           </div>
+           <div className="selected">
+               <h2> Element Selected <br/>{this.state.selected}</h2>
+               <button className="frontbackbuttons">Go back</button>
+               <button className="frontbackbuttons">bring front</button>
            </div>
            </>
         )

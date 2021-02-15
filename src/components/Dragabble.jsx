@@ -19,7 +19,7 @@ var Dragabble=ComposedComponent => class  extends Component{
       
       }
       disableDragabble=()=>{
-        console.log("mouseup")
+       // console.log("mouseup")
         this.setState({
           Dragabble:false
         })
@@ -46,12 +46,12 @@ var Dragabble=ComposedComponent => class  extends Component{
           var rightx=0
           var centerx=0
         var ydata=data.y
-        console.log(this.props.elements)
+      //  console.log(this.props.elements)
       for (var element in this.props.elements){
-        console.log("events")
-        console.log(this.props.elements[element],data.x)
+      //  console.log("events")
+       // console.log(this.props.elements[element],data.x)
          if(element!=this.state.id){
-          console.log(this.props.elements[element])
+        //  console.log(this.props.elements[element])
         if(this.props.elements[element].x>data.x-5 && this.props.elements[element].x<data.x+5)//left left
         {
          xdata=this.props.elements[element].x
@@ -213,11 +213,11 @@ var Dragabble=ComposedComponent => class  extends Component{
      
       this.setState({
         axis:"both",
-        zindex:this.state.max+1,
+        zindex:this.props.maxindex+1,
         
       })
       console.log("zind "+this.state.zindex,this.props.maxindex)
-      this.props.setOffset(this.state.id,data.node.offsetWidth,data.node.offsetHeight,this.state.max+1)
+      this.props.setOffset(this.state.id,data.node.offsetWidth,data.node.offsetHeight,this.props.maxindex+1)
       
 
     }

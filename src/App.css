@@ -92,7 +92,7 @@ background-color: white;
   
  
 }
-.setpos:hover{
+.setpos:active{
   
   outline:1px solid blue;
   /* box-sizing: border-box; */
@@ -156,4 +156,12 @@ background-color: white;
  margin-top: 249.5px;
   position:absolute;
   background-color: red;
+}
+.selected{
+  color:white;
+}
+.frontbackbuttons{
+  width: 50%;
+ margin-top: 10%;
+ font-size: larger;
 }
