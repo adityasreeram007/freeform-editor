@@ -120,11 +120,9 @@ background-color: white;
   position: absolute;
   border-bottom: 1px solid red;height:400px;
 } */
-.groupbox{
-  position:absolute;
-  
-  
 
+.groupdrag{
+  position: relative;
   
 }
 .verticalcenter{
