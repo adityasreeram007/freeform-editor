@@ -11,15 +11,16 @@ var Dragabble=ComposedComponent => class  extends Component{
   }
 
   state = {
-    x:70,
-    y:220,
+    x:this.props.elements[this.props.id].x ,
+            y:this.props.elements[this.props.id].y ,
     
    id:this.props.id,
    offsetHeight:0,
    offsetWidth:0,
    axis:"both",
    zindex:this.props.elements[this.props.id].zindex+1,
-   max:this.props.maxindex
+   max:this.props.maxindex,
+   bordercolor:"transparent"
    
    };
     
@@ -33,6 +34,15 @@ var Dragabble=ComposedComponent => class  extends Component{
         this.setState({
           zindex:this.props.elements[this.props.id].zindex
         })}
+        console.log("propsporps "+this.state.x,this.props.elements[this.props.id].x,this.state.y,this.props.elements[this.props.id].y)
+        // if(this.state.x!==this.props.elements[this.props.id].x || this.state.y!==this.props.elements[this.props.id].y){
+         
+        //   this.setState({
+        //     x:this.props.elements[this.props.id].x ,
+        //     y:this.props.elements[this.props.id].y ,
+        //     axis:"both"
+        //   })
+        // }
       }
     
       disableDragabble=()=>{
@@ -46,6 +56,7 @@ var Dragabble=ComposedComponent => class  extends Component{
       // console.log('Event: ', e);
       // console.log('Data: ', data);
       this.setState({scale:1})
+      // this.props.addcoords(this.state.id,this.state.x,this.state.y,this.state.offsetHeight,this.state.offsetWidth)
       this.props.hidehorizontal()
       this.props.hidevertical()
      this.props.hidelines()
@@ -239,6 +250,19 @@ var Dragabble=ComposedComponent => class  extends Component{
 
     }
     selectElement=()=>{
+     
+      if(this.state.bordercolor==="transparent"){
+      this.setState({
+        bordercolor:"blue",
+
+      })}
+      else{
+        this.setState({
+          bordercolor:"transparent",
+  
+        })
+      }
+      this.props.addSelected(this.state.id)
       this.props.selectElement(this.state.id)
     }
     
@@ -267,7 +291,7 @@ var Dragabble=ComposedComponent => class  extends Component{
           
          
          >
-            <div className="setpos"  ref={this.myInput} onClick={this.selectElement} style={{zIndex:this.state.zindex}}>
+            <div className="setpos"  ref={this.myInput} onClick={this.selectElement} style={{zIndex:this.state.zindex,outline:"1px solid",outlineColor:this.state.bordercolor}}>
             
               
               

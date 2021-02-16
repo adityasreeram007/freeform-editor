@@ -10,7 +10,7 @@ class App extends Component{
   }
   state={
     elements:{},
-    maxindex:1
+    maxindex:99999
 
 }
   addelement=(value)=>{
@@ -56,6 +56,15 @@ setOffset=(elementid,width,height,zindex)=>{
       })
     }
     
+  
+}
+setGroupMovement=(elements)=>{
+  console.log("statwte")
+  console.log(this.state.elements)
+  this.setState({
+    elements:elements
+  })
+  console.log(this.state.elements)
   
 }
 setInitialOffset=(elementid,width,height)=>{
@@ -139,7 +148,7 @@ setZindex=(direction,elementid)=>{
       <ElementsTab addelement={this.addelement} />
       </div>
       <div className="flexitem">
-        <Editor elements={this.state.elements} addcoords={this.addcoords} setOffset={this.setOffset} maxindex={this.state.maxindex} setInitialOffset={this.setInitialOffset} setZindex={this.setZindex}/>
+        <Editor elements={this.state.elements} addcoords={this.addcoords} setOffset={this.setOffset} maxindex={this.state.maxindex} setInitialOffset={this.setInitialOffset} setZindex={this.setZindex} setGroupMovement={this.setGroupMovement}/>
       </div>
       
       </div>
