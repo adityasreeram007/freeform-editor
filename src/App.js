@@ -10,7 +10,16 @@ class App extends Component{
   }
   state={
     elements:{},
+    selection:{
+    },
+    groups:{},
     maxindex:99999
+
+}
+addSelection=(groupx,groupy)=>{
+  this.setState({
+    selection:{groupx:groupx,groupy:groupy}
+  })
 
 }
   addelement=(value)=>{
@@ -34,6 +43,10 @@ class App extends Component{
         elements:newlist
     })
     // console.log(this.state)
+    
+
+}
+addgroups=()=>{
 
 }
 setOffset=(elementid,width,height,zindex)=>{
@@ -69,11 +82,12 @@ setGroupMovement=(elements)=>{
 }
 setInitialOffset=(elementid,width,height)=>{
   var stateelements=this.state.elements
+  if(stateelements[elementid].offsetWidth!==width || stateelements[elementid].offsetHeight!==height){
   stateelements[elementid].offsetWidth=width
   stateelements[elementid].offsetHeight=height
   this.setState({
     elements:stateelements
-  })
+  })}
 console.log(this.state)
 }
 doOverlap=(x1,y1,x2,y2,x3,y3,x4,y4)=>{
@@ -140,6 +154,18 @@ setZindex=(direction,elementid)=>{
     })
     // console.log("app state")
     // console.log(this.state)
+  
+  }
+  setElementCoords=()=>{
+    var ele="element-0"
+    var elements=this.state.elements
+    if(ele in elements){
+      this.state.elements[ele].x=0
+      this.state.elements[ele].y=0
+      this.setState({
+        elements:elements
+      })
+    }
   }
   render(){
     return (
@@ -148,7 +174,7 @@ setZindex=(direction,elementid)=>{
       <ElementsTab addelement={this.addelement} />
       </div>
       <div className="flexitem">
-        <Editor elements={this.state.elements} addcoords={this.addcoords} setOffset={this.setOffset} maxindex={this.state.maxindex} setInitialOffset={this.setInitialOffset} setZindex={this.setZindex} setGroupMovement={this.setGroupMovement}/>
+        <Editor elements={this.state.elements} selection={this.state.selection} addcoords={this.addcoords} setOffset={this.setOffset} maxindex={this.state.maxindex} setInitialOffset={this.setInitialOffset} setZindex={this.setZindex} setGroupMovement={this.setGroupMovement} addSelection={this.addSelection}/>
       </div>
       
       </div>

@@ -8,8 +8,9 @@ var Dragabble=ComposedComponent => class  extends Component{
   constructor(props){
     super(props)
     this.myInput = React.createRef()
-  }
 
+
+  }
   state = {
     x:this.props.elements[this.props.id].x ,
             y:this.props.elements[this.props.id].y ,
@@ -23,25 +24,33 @@ var Dragabble=ComposedComponent => class  extends Component{
    bordercolor:"transparent"
    
    };
+
     
       componentDidMount() {
         this.props.setInitialOffset(this.props.id,this.myInput.current.offsetWidth,this.myInput.current.offsetHeight)
         
       }
       componentDidUpdate(){
-        console.log(this.props.elements)
+        console.log("inside drag update")
+        
+        
+        console.log(this.props)
         if(this.state.zindex!=this.props.elements[this.props.id].zindex){
         this.setState({
           zindex:this.props.elements[this.props.id].zindex
         })}
         console.log("propsporps "+this.state.x,this.props.elements[this.props.id].x,this.state.y,this.props.elements[this.props.id].y)
-        // if(this.state.x!==this.props.elements[this.props.id].x || this.state.y!==this.props.elements[this.props.id].y){
+        if(this.props.group.includes(this.props.id) && this.props.group.length>1){
+        if(this.props.elements[this.props.id].x!==this.state.x || this.props.elements[this.props.id].y!==this.state.y){
          
-        //   this.setState({
-        //     x:this.props.elements[this.props.id].x ,
-        //     y:this.props.elements[this.props.id].y ,
-        //     axis:"both"
-        //   })
+          this.setState({
+            x:this.props.elements[this.props.id].x ,
+            y:this.props.elements[this.props.id].y ,
+            axis:"none"
+          })
+        }}
+        // else{
+        //   this.props.setInitialOffset(this.props.id,this.myInput.current.offsetWidth,this.myInput.current.offsetHeight)
         // }
       }
     
@@ -249,8 +258,8 @@ var Dragabble=ComposedComponent => class  extends Component{
       
 
     }
-    selectElement=()=>{
-     
+    selectElement=(e)=>{
+     if(e.shiftKey){
       if(this.state.bordercolor==="transparent"){
       this.setState({
         bordercolor:"blue",
@@ -265,7 +274,7 @@ var Dragabble=ComposedComponent => class  extends Component{
       this.props.addSelected(this.state.id)
       this.props.selectElement(this.state.id)
     }
-    
+  }
     render()
     {
       
