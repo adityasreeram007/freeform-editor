@@ -81,10 +81,16 @@ class GroupDraggable extends Component{
     render(){
         console.log("groupppupup")
         console.log(this.props.tags)
+        var grouptags=this.props.tags
+        var renderlist=grouptags.map((item,index)=>{
+                return (<span key={index}>{item}</span>)
+        })
+        console.log(renderlist)
+
         return (<>
-            <Dragabble axis="both" onStop={this.onStopDrag} position={{x:this.state.groupboxx,y:this.state.groupboxy}} onDrag={this.onDrag} bounds={{left:0,right:230,top:0,bottom:480}} key={"grp"} >
-                <div className="groupdrag" style={{height:this.state.groupboxheight,width:this.state.groupboxwidth,outline:"2px solid",outlineColor:this.state.groupboxcolor}} >
-                {this.props.tags}
+            <Dragabble axis="both" onStop={this.onStopDrag} position={{x:this.state.groupboxx,y:this.state.groupboxy}} onDrag={this.onDrag} bounds={{left:0,right:230,top:0,bottom:480}} key={"grp1"} >
+                <div className="groupdrag" style={{height:this.state.groupboxheight,width:this.state.groupboxwidth,outline:"2px solid",outlineColor:this.state.groupboxcolor}} key={"grp2"} >
+                {renderlist}
 
                 </div>
                 

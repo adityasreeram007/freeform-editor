@@ -297,10 +297,11 @@ var Dragabble=ComposedComponent => class  extends Component{
           onStop={this.stopdrag}
           bounds={{left:0,right:230,top:0,bottom:480}}
           scale={this.state.scale}
+          key={this.state.id}
           
          
          >
-            <div className="setpos"  ref={this.myInput} onClick={this.selectElement} style={{zIndex:this.state.zindex,outline:"1px solid",outlineColor:this.state.bordercolor}}>
+            <div className="setpos"  ref={this.myInput} onClick={this.selectElement} style={{zIndex:this.state.zindex,outline:"1px solid",outlineColor:this.state.bordercolor}} key={`setpos${this.state.id}`}>
             
               
               

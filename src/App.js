@@ -31,7 +31,7 @@ addSelection=(groupx,groupy)=>{
     var newlist=this.state.elements
     newlist[elementid]={
         type:value,
-        id:`element-${elementid}`,
+        id:elementid,
         x:70,
         y:220,
         offsetHeight:0,

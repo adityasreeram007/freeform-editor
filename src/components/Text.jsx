@@ -4,7 +4,7 @@ class Text extends Component{
     render(){
         //console.log(this.props)
         return (
-            <p className={this.props.id} id={this.props.id} >{this.props.id}
+            <p className={this.props.id} id={this.props.id} key={this.props.id} >{this.props.id}
             </p>
         )
 

@@ -218,82 +218,175 @@ class Editor extends Component{
             selected:elementid
         })
     }
-    renderElements=()=>{
+    // renderElements=()=>{
         
         
-        var elements=this.state.elements
-        var tags=[]
-        console.log("grorgrolrbrk")
-        console.log(this.state.elements)
-        var grouptags=[]
-        if(this.state.group.length>1){
-        for (var element in this.state.group){
+    //     var elements=this.state.elements
+    //     var tags=[]
+    //     console.log("grorgrolrbrk")
+    //     console.log(this.state.elements)
+    //     var grouptags=[]
+    //     if(this.state.group.length>1){
+    //     for (var element in this.state.group){
+            
+    //         console.log(this.state.group)
+    //         if(elements[element].type==="text"){
+    //             grouptags.push( <Text id={element} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+    //                setOffset={this.props.setOffset} elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+    //                addSelected={this.addSelected} group={this.state.group}
+                
+    //             />)
+    //         }
+    //         else if(elements[element].type==="image"){
+    //             grouptags.push(<Image id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords} 
+    //                 setOffset={this.props.setOffset}  elements={this.props.elements}   showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+    //                 addSelected={this.addSelected} group={this.state.group}/>)
+
+    //         }
+    //         else if(elements[element].type==="rectangle"){
+    //             grouptags.push(<Rectangle id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+    //                 setOffset={this.props.setOffset}   elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+    //                 addSelected={this.addSelected} group={this.state.group}/>)
+
+    //         }
+    //         else if(elements[element].type==="button"){
+    //             grouptags.push(<Button id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+    //                 setOffset={this.props.setOffset}  elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+    //                 addSelected={this.addSelected} group={this.state.group}/>) 
+
+    //         }
+    //     }
+    //     console.log(grouptags)
+    // }
+      
+    // console.log(grouptags)}
+
+    //     for (var element in elements){
+           
+    //         if(this.state.group.includes(element)===false || this.state.group.length==1){
+    //         if(elements[element].type==="text"){
+    //             tags.push( <Text id={element} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+    //                setOffset={this.props.setOffset} elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+    //                addSelected={this.addSelected} group={this.state.group}
+                
+    //             />)
+    //         }
+    //         else if(elements[element].type==="image"){
+    //             tags.push(<Image id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords} 
+    //                 setOffset={this.props.setOffset}  elements={this.props.elements}   showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+    //                 addSelected={this.addSelected} group={this.state.group}/>)
+
+    //         }
+    //         else if(elements[element].type==="rectangle"){
+    //             tags.push(<Rectangle id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+    //                 setOffset={this.props.setOffset}   elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+    //                 addSelected={this.addSelected} group={this.state.group}/>)
+
+    //         }
+    //         else if(elements[element].type==="button"){
+    //             tags.push(<Button id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+    //                 setOffset={this.props.setOffset}  elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+    //                 addSelected={this.addSelected} group={this.state.group}/>) 
+
+    //         }
+    //     }}
+    //     // console.log(tags)
+    //     tags.push(<GroupDraggable id={"group1"} addSelection={this.props.addSelection} tags={grouptags} elements={this.props.elements} group={this.state.group} setGroupMovement={this.props.setGroupMovement}/>)
+    //     return tags
+    // }
+renderGroupElements=()=>{
+    var elements=this.props.elements
+     if(this.state.group.length>1){
+    var grouplist=this.state.group.map((element,index)=>{
+   
+   
             
             console.log(this.state.group)
-            if(elements[this.state.group[element]].type==="text"){
-                grouptags.push( <Text id={this.state.group[element]} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
-                   setOffset={this.props.setOffset} elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
-                   addSelected={this.addSelected} group={this.state.group}
-                
-                />)
-            }
-            else if(elements[this.state.group[element]].type==="image"){
-                grouptags.push(<Image id={this.state.group[element]}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords} 
-                    setOffset={this.props.setOffset}  elements={this.props.elements}   showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
-                    addSelected={this.addSelected} group={this.state.group}/>)
-
-            }
-            else if(elements[this.state.group[element]].type==="rectangle"){
-                grouptags.push(<Rectangle id={this.state.group[element]}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
-                    setOffset={this.props.setOffset}   elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
-                    addSelected={this.addSelected} group={this.state.group}/>)
-
-            }
-            else if(elements[this.state.group[element]].type==="button"){
-                grouptags.push(<Button id={this.state.group[element]}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
-                    setOffset={this.props.setOffset}  elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
-                    addSelected={this.addSelected} group={this.state.group}/>) 
-
-            }
-        }
-        console.log(grouptags)
-      
-    console.log(grouptags)}
-
-        for (var element in elements){
-           
-            if(this.state.group.includes(element)===false || this.state.group.length==1){
             if(elements[element].type==="text"){
-                tags.push( <Text id={element} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+                return  <Text key={`group-${element}`} id={element} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
                    setOffset={this.props.setOffset} elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
                    addSelected={this.addSelected} group={this.state.group}
                 
-                />)
+                />
             }
             else if(elements[element].type==="image"){
-                tags.push(<Image id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords} 
+                return <Image key={`group-${element}`} id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords} 
                     setOffset={this.props.setOffset}  elements={this.props.elements}   showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
-                    addSelected={this.addSelected} group={this.state.group}/>)
+                    addSelected={this.addSelected} group={this.state.group}/>
 
             }
             else if(elements[element].type==="rectangle"){
-                tags.push(<Rectangle id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+                return <Rectangle key={`group-${element}`} id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
                     setOffset={this.props.setOffset}   elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
-                    addSelected={this.addSelected} group={this.state.group}/>)
+                    addSelected={this.addSelected} group={this.state.group}/>
 
             }
             else if(elements[element].type==="button"){
-                tags.push(<Button id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+                return <Button key={`group-${element}`} id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
                     setOffset={this.props.setOffset}  elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
-                    addSelected={this.addSelected} group={this.state.group}/>) 
+                    addSelected={this.addSelected} group={this.state.group}/>
 
             }
-        }}
-        // console.log(tags)
-        tags.push(<GroupDraggable id={"group1"} addSelection={this.props.addSelection} tags={grouptags} elements={this.props.elements} group={this.state.group} setGroupMovement={this.props.setGroupMovement}/>)
-        return tags
+       
+        
+   
+    })
+    return <GroupDraggable id={"group1"} addSelection={this.props.addSelection} tags={grouplist} elements={this.props.elements} group={this.state.group} setGroupMovement={this.props.setGroupMovement}/>
+     }
+
+}
+renderElements=()=>{
+    var elements=this.props.elements
+    var elementsarr=[]
+    for (var element in this.props.elements){
+        if(!this.state.group.includes(element) || this.state.group.length===1){
+        elementsarr.push(element)}
     }
+    console.log("elelelele")
+    console.log(elementsarr)
+    var renderelements=elementsarr.map((element,index)=>{
+        
+       
+                    if(elements[element].type==="text"){
+                        return <Text key={element} id={element} showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+                           setOffset={this.props.setOffset} elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+                           addSelected={this.addSelected} group={this.state.group}
+                        
+                        />
+                    }
+                    else if(elements[element].type==="image"){
+                        return <Image key={element} id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords} 
+                            setOffset={this.props.setOffset}  elements={this.props.elements}   showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+                            addSelected={this.addSelected} group={this.state.group}/>
+        
+                    }
+                    else if(elements[element].type==="rectangle"){
+                        return <Rectangle key={element} id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+                            setOffset={this.props.setOffset}   elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+                            addSelected={this.addSelected} group={this.state.group}/>
+        
+                    }
+                    else if(elements[element].type==="button"){
+                        return <Button key={element} id={element}  showhorizontal={this.showhorizontalline}  showvertical={this.showverticalline} hidehorizontal={this.hidehorizontalline} hidevertical={this.hideverticalline} addcoords={this.props.addcoords}
+                            setOffset={this.props.setOffset}  elements={this.props.elements} showlines={this.showlines} hidelines={this.hidelines} maxindex={this.props.maxindex} selectElement={this.selectElement} setInitialOffset={this.props.setInitialOffset}
+                            addSelected={this.addSelected} group={this.state.group}/>
+        
+                    }
+                
+                
+
+    })
+    console.log("elerendererd")
+    console.log(renderelements)
+    return renderelements
+
+
+}
+
     render(){
+
+        console.log(this.state)
+
         return (<>
            
            <div className="area" id="area">
@@ -326,6 +419,7 @@ class Editor extends Component{
             </div></Draggable>:""} */}
 
            
+            {this.renderGroupElements()}
             {this.renderElements()}
             
            </div>
