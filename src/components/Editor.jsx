@@ -257,7 +257,7 @@ class Editor extends Component{
             }
         }
         console.log(grouptags)
-        tags.push(<GroupDraggable id={"group1"} addSelection={this.props.addSelection} tags={grouptags} elements={this.props.elements} group={this.state.group} setGroupMovement={this.props.setGroupMovement}/>)
+      
     console.log(grouptags)}
 
         for (var element in elements){
@@ -290,6 +290,7 @@ class Editor extends Component{
             }
         }}
         // console.log(tags)
+        tags.push(<GroupDraggable id={"group1"} addSelection={this.props.addSelection} tags={grouptags} elements={this.props.elements} group={this.state.group} setGroupMovement={this.props.setGroupMovement}/>)
         return tags
     }
     render(){
