@@ -18,9 +18,10 @@ class GroupDraggable extends Component{
         elements:this.props.elements
     }
     componentDidMount(){
-            if(this.state.group.length>1  && this.state.groupboxcolor==="transparent"){
+            if(this.state.group.length>1 ){
             var minx=this.props.elements[this.state.group[0]].x,miny=this.props.elements[this.state.group[0]].y,maxx=0,maxy=0
-            for (var element in this.props.elements){
+            for (var elementind in this.props.group){
+                var element=this.props.group[elementind]
                 if(this.props.elements[element].x<minx){
                     minx=this.props.elements[element].x
                 }
@@ -33,10 +34,10 @@ class GroupDraggable extends Component{
                 if(this.props.elements[element].y+this.props.elements[element].offsetHeight>maxy){
                     maxy=this.props.elements[element].y+this.props.elements[element].offsetHeight
                 }
-
+            
 
             }
-            console.log(minx,miny,maxx,maxy)
+            
             this.setState({
                 showgroupbox:true,
                 groupboxcolor:"blue",
@@ -46,12 +47,14 @@ class GroupDraggable extends Component{
                 groupboxwidth:maxx-minx
             })
             console.log("propsssss")
-            console.log(this.props)
             var elements=this.props.elements
+            console.log(elements)
+            
             for (var element in this.props.group){
                 elements[this.props.group[element]].x=elements[this.props.group[element]].x-minx
                 elements[this.props.group[element]].y=elements[this.props.group[element]].y-miny
             }
+            console.log(elements)
             this.props.setGroupMovement(elements)
         }
     }
