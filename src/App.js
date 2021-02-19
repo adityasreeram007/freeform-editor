@@ -11,6 +11,12 @@ class App extends Component{
   state={
     elements:{},
     selection:{
+      groupx:0,
+      groupy:0
+    },
+    finalgroup:{
+      finalx:0,
+      finaly:0
     },
     groups:{},
     maxindex:99999
@@ -48,6 +54,20 @@ addSelection=(groupx,groupy)=>{
 }
 addgroups=()=>{
 
+}
+addfinalSelection=(x,y)=>{
+  var finalselect={}
+  finalselect={
+    finalx:x,
+    finaly:y
+  }
+  console.log("final final final")
+  console.log(this.state.selection)
+  console.log(finalselect)
+this.setState({
+  finalgroup:finalselect
+  
+})
 }
 setOffset=(elementid,width,height,zindex)=>{
   var stateelements=this.state.elements
@@ -161,7 +181,7 @@ setZindex=(direction,elementid)=>{
     var elements=this.state.elements
     if(ele in elements){
       this.state.elements[ele].x=0
-      this.state.elements[ele].y=0
+     this.state.elements[ele].y=0
       this.setState({
         elements:elements
       })
@@ -174,7 +194,7 @@ setZindex=(direction,elementid)=>{
       <ElementsTab addelement={this.addelement} />
       </div>
       <div className="flexitem">
-        <Editor elements={this.state.elements} selection={this.state.selection} addcoords={this.addcoords} setOffset={this.setOffset} maxindex={this.state.maxindex} setInitialOffset={this.setInitialOffset} setZindex={this.setZindex} setGroupMovement={this.setGroupMovement} addSelection={this.addSelection}/>
+        <Editor elements={this.state.elements} addfinalSelection={this.addfinalSelection} finalgroup={this.state.finalgroup} selection={this.state.selection} addcoords={this.addcoords} setOffset={this.setOffset} maxindex={this.state.maxindex} setInitialOffset={this.setInitialOffset} setZindex={this.setZindex} setGroupMovement={this.setGroupMovement} addSelection={this.addSelection}/>
       </div>
       
       </div>

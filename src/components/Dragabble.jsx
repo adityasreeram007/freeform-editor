@@ -27,12 +27,22 @@ var Dragabble=ComposedComponent => class  extends Component{
 
     
       componentDidMount() {
+        console.log(this.myInput)
         this.props.setInitialOffset(this.props.id,this.myInput.current.offsetWidth,this.myInput.current.offsetHeight)
         
       }
-      componentDidUpdate(){
+      componentDidUpdate(prev){
         console.log("inside drag update")
-        
+        if(this.props.group.includes(this.props.id) && prev.group.includes(this.props.id)===false){
+          this.setState({
+            axis:"none"
+          })
+        }
+        if(this.props.group.includes(this.props.id)===false && prev.group.includes(this.props.id)===true){
+          this.setState({
+            axis:"both"
+          })
+        }
         
         console.log(this.props)
         if(this.state.zindex!=this.props.elements[this.props.id].zindex){
@@ -40,15 +50,15 @@ var Dragabble=ComposedComponent => class  extends Component{
           zindex:this.props.elements[this.props.id].zindex
         })}
         console.log("propsporps "+this.state.x,this.props.elements[this.props.id].x,this.state.y,this.props.elements[this.props.id].y)
-        if(this.props.group.includes(this.props.id) && this.props.group.length>1){
-        if(this.props.elements[this.props.id].x!==this.state.x || this.props.elements[this.props.id].y!==this.state.y){
+        // if(this.props.group.includes(this.props.id) && this.props.group.length>1){
+        // if(this.props.elements[this.props.id].x!==this.state.x || this.props.elements[this.props.id].y!==this.state.y){
          
-          this.setState({
-            x:this.props.elements[this.props.id].x ,
-            y:this.props.elements[this.props.id].y ,
-            axis:"none"
-          })
-        }}
+        //   this.setState({
+        //     x:this.props.elements[this.props.id].x ,
+        //     y:this.props.elements[this.props.id].y ,
+        //     axis:"none"
+        //   })
+        // }}
         // else{
         //   this.props.setInitialOffset(this.props.id,this.myInput.current.offsetWidth,this.myInput.current.offsetHeight)
         // }
@@ -64,7 +74,8 @@ var Dragabble=ComposedComponent => class  extends Component{
     eventLogger = (e, data) => {
       // console.log('Event: ', e);
       // console.log('Data: ', data);
-      this.setState({scale:1})
+      if(this.props.group.includes(this.props.id)===false || this.props.group.length==1)
+{      this.setState({scale:1})
       // this.props.addcoords(this.state.id,this.state.x,this.state.y,this.state.offsetHeight,this.state.offsetWidth)
       this.props.hidehorizontal()
       this.props.hidevertical()
@@ -232,10 +243,11 @@ var Dragabble=ComposedComponent => class  extends Component{
         
       this.props.showlines(leftv,centerv,rightv,leftx,centerx,rightx)
       
-      
+}
 
     };
     stopdrag=()=>{
+      if(this.props.group.includes(this.props.id)===false  || this.props.group.length==1){
       this.props.hidehorizontal()
       this.props.hidevertical()
       // this.props.hiderightverticalline()
@@ -245,9 +257,10 @@ var Dragabble=ComposedComponent => class  extends Component{
       this.props.hidelines()
       this.props.addcoords(this.state.id,this.state.x,this.state.y,this.state.offsetHeight,this.state.offsetWidth)
     }
+  }
     
     setOffset=(e,data)=>{
-     
+     if(this.props.group.includes(this.props.id)===false || this.props.group.length==1){
       this.setState({
         axis:"both",
         zindex:this.props.maxindex+1,
@@ -255,7 +268,7 @@ var Dragabble=ComposedComponent => class  extends Component{
       })
       console.log("zind "+this.state.zindex,this.props.maxindex)
       this.props.setOffset(this.state.id,data.node.offsetWidth,data.node.offsetHeight,this.props.maxindex+1)
-      
+    }
 
     }
     selectElement=(e)=>{
@@ -278,20 +291,39 @@ var Dragabble=ComposedComponent => class  extends Component{
     render()
     {
       
-        const { children } = this.props;
-    const { translateX, translateY, isDragging } = this.state;
-      var x=this.state.x+"px"
-      var y=this.state.y+"px"
-      var coords={
-        top:x,
-        left:y
+    //     const { children } = this.props;
+    // const { translateX, translateY, isDragging } = this.state;
+    //   var x=this.state.x+"px"
+    //   var y=this.state.y+"px"
+    //   var coords={
+    //     top:x,
+    //     left:y
+    //   }
+      var position = {
+        x: this.state.x,
+        y: this.state.y
+      };
+      if(this.props.group.includes(this.props.id)===true || this.props.group.length==1) {
+        var tempx=this.state.x-this.props.selection.groupx
+       
+        var tempy=this.state.y-this.props.selection.groupy
+       
+        position={
+        x:tempx,
+        y:tempy
+        }
+        
+        
       }
+      console.log("position position position")
+      console.log(this.props.selection)
+      
       // console.log(coords)
         return (
 
           <Draggable
           axis={this.state.axis}
-          position={{x:this.state.x,y:this.state.y}}
+          position={position}
           onStart={this.setOffset}
           onDrag={this.eventLogger}
           onStop={this.stopdrag}
