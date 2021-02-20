@@ -24,7 +24,8 @@ class App extends Component{
 }
 addSelection=(groupx,groupy)=>{
   this.setState({
-    selection:{groupx:groupx,groupy:groupy}
+    selection:{groupx:groupx,groupy:groupy},
+   
   })
 
 }

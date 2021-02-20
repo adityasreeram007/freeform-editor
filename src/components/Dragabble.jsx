@@ -304,9 +304,9 @@ var Dragabble=ComposedComponent => class  extends Component{
         y: this.state.y
       };
       if(this.props.group.includes(this.props.id)===true || this.props.group.length==1) {
-        var tempx=this.state.x-this.props.selection.groupx
+        var tempx=(this.state.x-this.props.selection.groupx)//+(this.props.finalgroup.finalx)//-this.props.selection.groupx)
        
-        var tempy=this.state.y-this.props.selection.groupy
+        var tempy=(this.state.y-this.props.selection.groupy)//+(this.props.finalgroup.finaly)//-this.props.selection.groupy)
        
         position={
         x:tempx,
@@ -315,6 +315,20 @@ var Dragabble=ComposedComponent => class  extends Component{
         
         
       }
+      // if(this.props.selection.groupx>this.props.finalgroup.finalx || this.props.selection.groupy>this.props.finalgroup.finaly )
+      // {
+      //     if(this.props.group[this.props.group.length-1]!==this.props.id){
+      //       var tempx=(this.state.x-this.props.selection.groupx)+(this.props.finalgroup.finalx-this.props.selection.groupx)
+       
+      //       var tempy=(this.state.y-this.props.selection.groupy)+(this.props.finalgroup.finaly-this.props.selection.groupy)
+           
+      //       position={
+      //       x:tempx,
+      //       y:tempy
+      //       }
+            
+      //     }
+      // }
       console.log("position position position")
       console.log(this.props.selection)
       
