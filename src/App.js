@@ -18,16 +18,52 @@ class App extends Component{
       finalx:0,
       finaly:0
     },
+    groupprevpos:{
+      x:0,
+      y:0
+    },
+    groupinit:{
+      x:0,
+      y:0
+    },
     groups:{},
-    maxindex:99999
+    maxindex:99999,
+    groupoffset:{
+
+    }
 
 }
 addSelection=(groupx,groupy)=>{
   this.setState({
     selection:{groupx:groupx,groupy:groupy},
+//     groupprevpos:{
+    
+// x:groupx,y:groupy    }
    
   })
 
+}
+addGroupOffset=(grpoff)=>{
+ 
+  this.setState({
+    groupoffset:grpoff
+  })
+}
+addGroupInit=(x,y)=>{
+  var group={
+    x:x,y:y
+  }
+  this.setState({
+      groupinit:group
+  })
+}
+addgroupprevpos=(x,y)=>{
+  var group={
+    x:x,y:y
+  }
+  this.setState({
+    groupprevpos:group
+  })
 }
   addelement=(value)=>{
     var count=0
@@ -62,9 +98,9 @@ addfinalSelection=(x,y)=>{
     finalx:x,
     finaly:y
   }
-  console.log("final final final")
-  console.log(this.state.selection)
-  console.log(finalselect)
+  // console.log("final final final")
+  // console.log(this.state.selection)
+  // console.log(finalselect)
 this.setState({
   finalgroup:finalselect
   
@@ -93,8 +129,8 @@ setOffset=(elementid,width,height,zindex)=>{
   
 }
 setGroupMovement=(elements)=>{
-  console.log("statwte")
-  console.log(this.state.elements)
+  // console.log("statwte")
+  // console.log(this.state.elements)
   this.setState({
     elements:elements
   })
@@ -109,10 +145,10 @@ setInitialOffset=(elementid,width,height)=>{
   this.setState({
     elements:stateelements
   })}
-console.log(this.state)
+//console.log(this.state)
 }
 doOverlap=(x1,y1,x2,y2,x3,y3,x4,y4)=>{
-  console.log(x1,y1,x2,y2,x3,y3,x4,y4)
+  //console.log(x1,y1,x2,y2,x3,y3,x4,y4)
   if(x1>=x4 || x3>=x2){
     return false
   }
@@ -122,7 +158,7 @@ doOverlap=(x1,y1,x2,y2,x3,y3,x4,y4)=>{
   return true
 }
 setZindex=(direction,elementid)=>{
-  console.log("setz")
+  // console.log("setz")
   var elements=this.state.elements
   if(direction==="forward"){
     var max=elements[elementid].zindex
@@ -138,14 +174,14 @@ setZindex=(direction,elementid)=>{
     this.setState({
       elements:elements
     })
-    console.log(this.state)
+    // console.log(this.state)
   }
   else{
     var min=elements[elementid].zindex
     for (var element in elements){
-      console.log(this.doOverlap(elements[elementid].x,elements[elementid].y,elements[elementid].x+elements[elementid].offsetWidth,
-        elements[elementid].y+elements[elementid].offsetHeight,elements[element].x,elements[element].y,elements[element].x+elements[element].offsetWidth,
-        elements[element].y+elements[element].offsetHeight))
+      // // console.log(this.doOverlap(elements[elementid].x,elements[elementid].y,elements[elementid].x+elements[elementid].offsetWidth,
+      //   elements[elementid].y+elements[elementid].offsetHeight,elements[element].x,elements[element].y,elements[element].x+elements[element].offsetWidth,
+      //   elements[element].y+elements[element].offsetHeight))
       if(this.doOverlap(elements[elementid].x,elements[elementid].y,elements[elementid].x+elements[elementid].offsetWidth,
         elements[elementid].y+elements[elementid].offsetHeight,elements[element].x,elements[element].y,elements[element].x+elements[element].offsetWidth,
         elements[element].y+elements[element].offsetHeight) && elements[element].zindex<min){
@@ -158,11 +194,11 @@ setZindex=(direction,elementid)=>{
     else{
       elements[elementid].zindex=0
     }
-    console.log(min)
+    // console.log(min)
     this.setState({
       elements:elements
     })
-    console.log(this.state)
+    // console.log(this.state)
   }
 
 }
@@ -189,13 +225,14 @@ setZindex=(direction,elementid)=>{
     }
   }
   render(){
+    // console.log(this.state.elements)
     return (
       <div class="flexbox">
         <div classname="flexitem">
       <ElementsTab addelement={this.addelement} />
       </div>
       <div className="flexitem">
-        <Editor elements={this.state.elements} addfinalSelection={this.addfinalSelection} finalgroup={this.state.finalgroup} selection={this.state.selection} addcoords={this.addcoords} setOffset={this.setOffset} maxindex={this.state.maxindex} setInitialOffset={this.setInitialOffset} setZindex={this.setZindex} setGroupMovement={this.setGroupMovement} addSelection={this.addSelection}/>
+        <Editor elements={this.state.elements} groupoffset={this.state.groupoffset} addGroupOffset={this.addGroupOffset} groupinit={this.state.groupinit} addGroupInit={this.addGroupInit} addgroupprevpos={this.addgroupprevpos} groupprevpos={this.state.groupprevpos} addfinalSelection={this.addfinalSelection} finalgroup={this.state.finalgroup} selection={this.state.selection} addcoords={this.addcoords} setOffset={this.setOffset} maxindex={this.state.maxindex} setInitialOffset={this.setInitialOffset} setZindex={this.setZindex} setGroupMovement={this.setGroupMovement} addSelection={this.addSelection}/>
       </div>
       
       </div>

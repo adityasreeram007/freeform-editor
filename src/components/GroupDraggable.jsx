@@ -46,9 +46,9 @@ class GroupDraggable extends Component{
                 groupboxheight:maxy-miny ,
                 groupboxwidth:maxx-minx
             })
-            console.log("propsssss")
+            // console.log("propsssss")
             var elements=this.props.elements
-            console.log(elements)
+            // console.log(elements)
             
             // for (var element in this.props.group){
             //     elements[this.props.group[element]].x=elements[this.props.group[element]].x-minx
@@ -56,17 +56,24 @@ class GroupDraggable extends Component{
             // }
             // console.log(elements)
             // this.props.setGroupMovement(elements)
-
+            var groupoffset=this.props.groupoffset
+            groupoffset[this.props.group[0]]={x:this.props.elements[this.props.group[0]].x-minx,y:this.props.elements[this.props.group[0]].y-miny}
+            // groupoffset[this.props.group[0]]['y']=
+            groupoffset[this.props.group[1]]={x:this.props.elements[this.props.group[1]].x-minx,y:this.props.elements[this.props.group[1]].y-miny}
+            // groupoffset[this.props.group[1]]['y']=
+            this.props.addGroupOffset(groupoffset)
+            console.log(groupoffset)
             this.props.addSelection(minx,miny)
         }
         
     }
     componentDidUpdate=(prev)=>{
-        console.log("updateupdateupdate")
-        console.log(prev)
+        // console.log("updateupdateupdate")
+        // console.log(prev)
         
         if(this.props.group.length>1 && prev.group.length<this.props.group.length){
             // this.props.addfinalSelection(this.state.groupboxx,this.state.groupboxy)
+            this.props.addGroupInit(this.props.selection.groupx,this.props.selection.groupy)
             var minx=this.state.groupboxx,miny=this.state.groupboxy,maxx=this.state.groupboxwidth+minx,maxy=this.state.groupboxheight+miny
             if(this.props.elements[this.props.group[this.props.group.length-1]].x<minx){
                 minx=this.props.elements[this.props.group[this.props.group.length-1]].x
@@ -89,10 +96,10 @@ class GroupDraggable extends Component{
                 groupboxheight:maxy-miny ,
                 groupboxwidth:maxx-minx
             })
-            console.log("propsssss")
-            this.props.addSelection(this.state.groupboxx,this.state.groupboxy)
+            // console.log("propsssss")
+            // this.props.addSelection(this.state.groupboxx,this.state.groupboxy)
             var elements=this.props.elements
-            console.log(elements)
+            // console.log(elements)
             
             // for (var element in this.props.group){
             //     elements[this.props.group[element]].x=elements[this.props.group[element]].x-minx
@@ -100,9 +107,24 @@ class GroupDraggable extends Component{
             // }
             // console.log(elements)
             // this.props.setGroupMovement(elements)
+            var groupoffset=this.props.groupoffset
+            if(minx<this.state.groupboxx || miny<this.state.groupboxy){
+                
+                for (var grpelements in groupoffset){
+                    groupoffset[grpelements].x+=(this.state.groupboxx-minx)
+                    groupoffset[grpelements].y+=(this.state.groupboxy-miny)
+                }
+              
+            
+            }
+            groupoffset[this.props.group[this.props.group.length-1]].x=this.props.elements[this.props.group[this.props.group.length-1]].x-minx
+            groupoffset[this.props.group[this.props.group.length-1]].y=this.props.elements[this.props.group[this.props.group.length-1]].y-miny
+
+            this.props.addGroupOffset(groupoffset)
             this.props.addSelection(minx,miny)
         }
         if(this.props.group.length>1 && prev.group.length>this.props.group.length){
+            this.props.addGroupInit(this.props.selection.groupx,this.props.selection.groupy)
             var minx=this.props.elements[this.props.group[0]].x,miny=this.props.elements[this.props.group[0]].y,maxx=0,maxy=0
             for (var elementind in this.props.group){
                 var element=this.props.group[elementind]
@@ -130,9 +152,9 @@ class GroupDraggable extends Component{
                 groupboxheight:maxy-miny ,
                 groupboxwidth:maxx-minx
             })
-            console.log("propsssss")
+            //console.log("propsssss")
             var elements=this.props.elements
-            console.log(elements)
+            //console.log(elements)
             
             // for (var element in this.props.group){
             //     elements[this.props.group[element]].x=elements[this.props.group[element]].x-minx
@@ -140,14 +162,28 @@ class GroupDraggable extends Component{
             // }
             // console.log(elements)
             // this.props.setGroupMovement(elements)
+            var groupoffset=this.props.groupoffset
+            if(minx<this.state.groupboxx || miny<this.state.groupboxy){
+                
+                for (var grpelements in groupoffset){
+                    groupoffset[grpelements].x+=(this.state.groupboxx-minx)
+                    groupoffset[grpelements].y+=(this.state.groupboxy-miny)
+                }
+              
+            
+            }
+            groupoffset[this.props.group[this.props.group.length-1]].x=this.props.elements[this.props.group[this.props.group.length-1]].x-minx
+            groupoffset[this.props.group[this.props.group.length-1]].y=this.props.elements[this.props.group[this.props.group.length-1]].y-miny
+
+            this.props.addGroupOffset(groupoffset)
 
             this.props.addSelection(minx,miny)
         }
     }
     onDrag=(e,data)=>{
         
-        console.log("data")
-        console.log(data)
+        // console.log("data")
+        // console.log(data)
         this.setState({
             groupboxx:data.x,
             groupboxy:data.y
@@ -167,11 +203,11 @@ class GroupDraggable extends Component{
         
     }
     render(){
-        console.log("groupppupup")
-        console.log(this.props.tags)
+        //console.log("groupppupup")
+        //console.log(this.props.tags)
         var renderlist=this.props.tags
         
-        console.log(renderlist)
+        //console.log(renderlist)
 
         return (<>
             <Dragabble axis="both" onStop={this.onStopDrag} position={{x:this.state.groupboxx,y:this.state.groupboxy}} onDrag={this.onDrag} bounds={{left:0,right:230,top:0,bottom:480}} key={"grp1"} >

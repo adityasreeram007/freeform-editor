@@ -27,12 +27,12 @@ var Dragabble=ComposedComponent => class  extends Component{
 
     
       componentDidMount() {
-        console.log(this.myInput)
+        // ////////console.log(this.myInput)
         this.props.setInitialOffset(this.props.id,this.myInput.current.offsetWidth,this.myInput.current.offsetHeight)
         
       }
       componentDidUpdate(prev){
-        console.log("inside drag update")
+        // ////////console.log("inside drag update")
         if(this.props.group.includes(this.props.id) && prev.group.includes(this.props.id)===false){
           this.setState({
             axis:"none"
@@ -44,12 +44,12 @@ var Dragabble=ComposedComponent => class  extends Component{
           })
         }
         
-        console.log(this.props)
+        // ////////console.log(this.props)
         if(this.state.zindex!=this.props.elements[this.props.id].zindex){
         this.setState({
           zindex:this.props.elements[this.props.id].zindex
         })}
-        console.log("propsporps "+this.state.x,this.props.elements[this.props.id].x,this.state.y,this.props.elements[this.props.id].y)
+        // ////////console.log("propsporps "+this.state.x,this.props.elements[this.props.id].x,this.state.y,this.props.elements[this.props.id].y)
         // if(this.props.group.includes(this.props.id) && this.props.group.length>1){
         // if(this.props.elements[this.props.id].x!==this.state.x || this.props.elements[this.props.id].y!==this.state.y){
          
@@ -65,15 +65,15 @@ var Dragabble=ComposedComponent => class  extends Component{
       }
     
       disableDragabble=()=>{
-       // console.log("mouseup")
+       // ////////console.log("mouseup")
         this.setState({
           Dragabble:false
         })
       }
 
     eventLogger = (e, data) => {
-      // console.log('Event: ', e);
-      // console.log('Data: ', data);
+      // ////////console.log('Event: ', e);
+      // ////////console.log('Data: ', data);
       if(this.props.group.includes(this.props.id)===false || this.props.group.length==1)
 {      this.setState({scale:1})
       // this.props.addcoords(this.state.id,this.state.x,this.state.y,this.state.offsetHeight,this.state.offsetWidth)
@@ -84,8 +84,8 @@ var Dragabble=ComposedComponent => class  extends Component{
         this.props.showvertical()}
         if(parseInt(data.node.offsetHeight/2)+data.y>248 && parseInt(data.node.offsetHeight/2)+data.y<256){
           this.props.showhorizontal()}
-          // console.log("propsss")
-          // console.log(this.props.elements)
+          // ////////console.log("propsss")
+          // ////////console.log(this.props.elements)
         var xdata=data.x;
           var leftv=false
           var rightv=false
@@ -94,12 +94,12 @@ var Dragabble=ComposedComponent => class  extends Component{
           var rightx=0
           var centerx=0
         var ydata=data.y
-      //  console.log(this.props.elements)
+      //  ////////console.log(this.props.elements)
       for (var element in this.props.elements){
-      //  console.log("events")
-       // console.log(this.props.elements[element],data.x)
+      //  ////////console.log("events")
+       // ////////console.log(this.props.elements[element],data.x)
          if(element!=this.state.id){
-        //  console.log(this.props.elements[element])
+        //  //////console.log(this.props.elements[element])
         if(this.props.elements[element].x>data.x-5 && this.props.elements[element].x<data.x+5)//left left
         {
          xdata=this.props.elements[element].x
@@ -124,8 +124,8 @@ var Dragabble=ComposedComponent => class  extends Component{
           leftx=this.props.elements[element].x+(this.props.elements[element].offsetWidth/2)
 
         }
-        // console.log("rightvertical")
-        // console.log(this.props.elements[element].x+this.props.elements[element].offsetWidth,data.x+data.node.offsetWidth)
+        // //////console.log("rightvertical")
+        // //////console.log(this.props.elements[element].x+this.props.elements[element].offsetWidth,data.x+data.node.offsetWidth)
         if(this.props.elements[element].x+this.props.elements[element].offsetWidth>data.x+data.node.offsetWidth-5 && this.props.elements[element].x+this.props.elements[element].offsetWidth<data.x+data.node.offsetWidth+5   )//right right
         {
           xdata=this.props.elements[element].x+this.props.elements[element].offsetWidth-data.node.offsetWidth
@@ -136,8 +136,8 @@ var Dragabble=ComposedComponent => class  extends Component{
           // this.setState({
           //   x:data.x+data.node.offsetWidth
           // })
-          // console.log("leftleft")
-          // console.log(this.state)
+          // //////console.log("leftleft")
+          // //////console.log(this.state)
 
         }
         if(this.props.elements[element].x>data.x+data.node.offsetWidth-5 && this.props.elements[element].x<data.x+data.node.offsetWidth+5 )//right left
@@ -173,8 +173,8 @@ var Dragabble=ComposedComponent => class  extends Component{
           ydata=data.y
           centerv=true
           centerx=this.props.elements[element].x+((this.props.elements[element].offsetWidth)/2)
-          // console.log('centers')
-          // console.log(this.props.elements[element].x+this.props.elements[element].offsetWidth,data.x+data.node.offsetWidth)
+          // //////console.log('centers')
+          // //////console.log(this.props.elements[element].x+this.props.elements[element].offsetWidth,data.x+data.node.offsetWidth)
           // this.props.showcenterline(data.x+(data.node.offsetWidth/2))
           // this.setState({
           //   x:parseInt(data.x+(data.node.offsetWidth/2))
@@ -253,7 +253,7 @@ var Dragabble=ComposedComponent => class  extends Component{
       // this.props.hiderightverticalline()
       // this.props.hideleftvertical()
       // this.props.hidecenterline()
-      // console.log(this.props)
+      // //////console.log(this.props)
       this.props.hidelines()
       this.props.addcoords(this.state.id,this.state.x,this.state.y,this.state.offsetHeight,this.state.offsetWidth)
     }
@@ -266,7 +266,7 @@ var Dragabble=ComposedComponent => class  extends Component{
         zindex:this.props.maxindex+1,
         
       })
-      console.log("zind "+this.state.zindex,this.props.maxindex)
+      // //////console.log("zind "+this.state.zindex,this.props.maxindex)
       this.props.setOffset(this.state.id,data.node.offsetWidth,data.node.offsetHeight,this.props.maxindex+1)
     }
 
@@ -303,24 +303,52 @@ var Dragabble=ComposedComponent => class  extends Component{
         x: this.state.x,
         y: this.state.y
       };
-      if(this.props.group.includes(this.props.id)===true || this.props.group.length==1) {
-        var tempx=(this.state.x-this.props.selection.groupx)//+(this.props.finalgroup.finalx)//-this.props.selection.groupx)
-       
-        var tempy=(this.state.y-this.props.selection.groupy)//+(this.props.finalgroup.finaly)//-this.props.selection.groupy)
-       
+      // console.log(this.props.groupoffset)
+      if(this.props.group.includes(this.props.id) && this.props.group.length>=2){
+        console.log(this.props.groupoffset)
         position={
-        x:tempx,
-        y:tempy
+          x:this.props.groupoffset[this.props.id].x,
+          y:this.props.groupoffset[this.props.id].y
         }
-        
-        
       }
-      // if(this.props.selection.groupx>this.props.finalgroup.finalx || this.props.selection.groupy>this.props.finalgroup.finaly )
-      // {
-      //     if(this.props.group[this.props.group.length-1]!==this.props.id){
-      //       var tempx=(this.state.x-this.props.selection.groupx)+(this.props.finalgroup.finalx-this.props.selection.groupx)
+      // if(this.props.group.includes(this.props.id)===true || this.props.group.length===1) {
+      //   // console.log("equalrqqequalrquall")
+      //   // console.log(this.props.elements)
+      //   // console.log(this.props.selection)
+      //   var tempx=(this.state.x-this.props.selection.groupx)//+(this.props.finalgroup.finalx)//-this.props.selection.groupx)
        
-      //       var tempy=(this.state.y-this.props.selection.groupy)+(this.props.finalgroup.finaly-this.props.selection.groupy)
+      //   var tempy=(this.state.y-this.props.selection.groupy)//+(this.props.finalgroup.finaly)//-this.props.selection.groupy)
+       
+      //   position={
+      //   x:tempx,
+      //   y:tempy
+      //   }
+        
+        
+      // }
+      // if(this.props.group.includes(this.props.id)===true && (this.props.selection.groupx===this.props.groupprevpos.x || this.props.selection.groupy===this.props.groupprevpos.y) && this.props.group.length>2 ){
+      //  console.log("equalrqqequalrquall")
+      //  console.log(this.props.elements)
+      //  console.log(this.props.groupprevpos)
+      //  console.log(this.props.groupinit)
+       
+      //   if(this.props.group[this.props.group.length-1]!=this.props.id ){
+
+      //   var tempx=(this.state.x-this.props.groupprevpos.x)+(this.props.groupprevpos.x-this.props.groupinit.x)//+(this.props.finalgroup.finalx)//-this.props.selection.groupx)
+       
+      //   var tempy=(this.state.y-this.props.groupprevpos.y)+(this.props.groupprevpos.y-this.props.groupinit.y)//+(this.props.finalgroup.finaly)//-this.props.selection.groupy)
+       
+      //   position={
+      //   x:tempx,
+      //   y:tempy
+      //   }
+      // }
+      // }
+   
+      // // //////console.log(this.props.selection,this.props.groupprevpos)
+      // if(this.props.group.includes(this.props.id)===true  )
+      // {
+       
            
       //       position={
       //       x:tempx,
@@ -329,10 +357,10 @@ var Dragabble=ComposedComponent => class  extends Component{
             
       //     }
       // }
-      console.log("position position position")
-      console.log(this.props.selection)
+      // //////console.log("position position position")
+      // //////console.log(this.props.selection)
       
-      // console.log(coords)
+      // //////console.log(coords)
         return (
 
           <Draggable
