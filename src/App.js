@@ -12,7 +12,9 @@ class App extends Component{
     elements:{},
     selection:{
       groupx:0,
-      groupy:0
+      groupy:0,
+      height:0,
+      width:0
     },
     finalgroup:{
       finalx:0,
@@ -33,9 +35,9 @@ class App extends Component{
     }
 
 }
-addSelection=(groupx,groupy)=>{
+addSelection=(groupx,groupy,height,width)=>{
   this.setState({
-    selection:{groupx:groupx,groupy:groupy},
+    selection:{groupx:groupx,groupy:groupy,height:height,width:width},
 //     groupprevpos:{
     
 // x:groupx,y:groupy    }
@@ -213,17 +215,17 @@ setZindex=(direction,elementid)=>{
     // console.log(this.state)
   
   }
-  setElementCoords=()=>{
-    var ele="element-0"
-    var elements=this.state.elements
-    if(ele in elements){
-      this.state.elements[ele].x=0
-     this.state.elements[ele].y=0
-      this.setState({
-        elements:elements
-      })
-    }
-  }
+  // setElementCoords=()=>{
+  //   var ele="element-0"
+  //   var elements=this.state.elements
+  //   if(ele in elements){
+  //     this.state.elements[ele].x=0
+  //    this.state.elements[ele].y=0
+  //     this.setState({
+  //       elements:elements
+  //     })
+  //   }
+  // }
   render(){
     // console.log(this.state.elements)
     return (

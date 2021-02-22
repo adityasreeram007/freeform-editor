@@ -203,11 +203,11 @@ class Editor extends Component{
         if(selected.length===len-1){
             // console.log("select select selcet")
             // console.log(elementid,2*this.props.selection.groupx-this.props.elements[elementid].x,this.props.selection.groupy+this.props.elements[elementid].y)
-            this.props.addcoords(elementid,(this.props.finalgroup.finalx-this.props.selection.groupx)+this.props.elements[elementid].x,(this.props.finalgroup.finaly-this.props.selection.groupy)+this.props.elements[elementid].y)
+            this.props.addcoords(elementid,(this.props.finalgroup.finalx+this.props.groupoffset[elementid].x),(this.props.finalgroup.finaly+this.props.groupoffset[elementid].y))
             if(selected.length===1){
-                this.props.addcoords(selected[0],(this.props.finalgroup.finalx-this.props.selection.groupx)+this.props.elements[selected[0]].x,(this.props.finalgroup.finaly-this.props.selection.groupy)+this.props.elements[selected[0]].y)
+                this.props.addcoords(selected[0],(this.props.finalgroup.finalx+this.props.groupoffset[selected[0]].x),(this.props.finalgroup.finaly+this.props.groupoffset[selected[0]].y))
                 selected=[]
-                this.props.addSelection(0,0)
+                this.props.addSelection(0,0,0,0)
             }
         }
         
@@ -342,7 +342,7 @@ renderGroupElements=()=>{
         
    
     })
-    return <GroupDraggable id={"group1"} groupoffset={this.props.groupoffset} addGroupOffset={this.props.addGroupOffset} groupinit={this.props.groupinit} addGroupInit={this.props.addGroupInit} groupprevpos={this.props.groupprevpos} addcoords={this.props.addcoords} finalgroup={this.props.finalgroup} addfinalSelection={this.props.addfinalSelection} selection={this.props.selection} addSelection={this.props.addSelection} tags={grouplist} elements={this.props.elements} group={this.state.group} setGroupMovement={this.props.setGroupMovement}/>
+    return <GroupDraggable id={"group1"} hidelines={this.hidelines} showlines={this.showlines} groupoffset={this.props.groupoffset} addGroupOffset={this.props.addGroupOffset} groupinit={this.props.groupinit} addGroupInit={this.props.addGroupInit} groupprevpos={this.props.groupprevpos} addcoords={this.props.addcoords} finalgroup={this.props.finalgroup} addfinalSelection={this.props.addfinalSelection} selection={this.props.selection} addSelection={this.props.addSelection} tags={grouplist} elements={this.props.elements} group={this.state.group} setGroupMovement={this.props.setGroupMovement}/>
      }
 
 }

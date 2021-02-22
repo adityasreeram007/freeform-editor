@@ -74,6 +74,8 @@ var Dragabble=ComposedComponent => class  extends Component{
     eventLogger = (e, data) => {
       // ////////console.log('Event: ', e);
       // ////////console.log('Data: ', data);
+      // console.log("selectio")
+      // console.log(this.props.selection)
       if(this.props.group.includes(this.props.id)===false || this.props.group.length==1)
 {      this.setState({scale:1})
       // this.props.addcoords(this.state.id,this.state.x,this.state.y,this.state.offsetHeight,this.state.offsetWidth)
@@ -98,7 +100,7 @@ var Dragabble=ComposedComponent => class  extends Component{
       for (var element in this.props.elements){
       //  ////////console.log("events")
        // ////////console.log(this.props.elements[element],data.x)
-         if(element!=this.state.id){
+         if(element!=this.state.id && this.props.group.includes(element)===false){
         //  //////console.log(this.props.elements[element])
         if(this.props.elements[element].x>data.x-5 && this.props.elements[element].x<data.x+5)//left left
         {
@@ -230,6 +232,49 @@ var Dragabble=ComposedComponent => class  extends Component{
         
       
       }
+      console.log("rightright",data.x+data.node.offsetWidth,this.props.finalgroup.finalx)
+      if(this.props.group.length>1){
+      if(this.props.finalgroup.finalx===data.x+data.node.offsetWidth)
+      // || this.props.finalgroup.finalx<data.x+data.node.offsetwidth+5)
+      {
+        console.log("true")
+        xdata=this.props.finalgroup.finalx-data.node.offsetWidth
+        ydata=data.y
+        rightv=true
+        rightx=this.props.finalgroup.finalx
+      }
+      if(data.x+data.node.offsetWidth===this.props.finalgroup.finalx+(this.props.selection.width/2))//-5 && data.x+data.node.offsetwidth<this.props.finalgroup.finalx+(this.props.selection.width/2)+5){
+      {  xdata=this.props.finalgroup.finalx-(data.node.offsetWidth)
+        ydata=data.y
+        rightv=true
+        rightx=this.props.finalgroup.finalx+(this.props.selection.width/2)
+      }
+      if(data.x+data.node.offsetWidth===this.props.finalgroup.finalx+this.props.selection.width){//-5 || data.x+data.node.offsetwidth<this.props.finalgroup.finalx+this.props.selection.width+5){
+        xdata=this.props.finalgroup.finalx+this.props.selection.width/2
+        ydata=data.y
+        rightv=true
+        rightx=this.props.finalgroup.finalx+this.props.selection.width
+      }
+    
+      if(data.x>this.props.finalgroup.finalx-5 && data.x<this.props.finalgroup.finalx+5){
+        xdata=this.props.finalgroup.finalx
+        ydata=data.y
+        leftv=true
+        leftx=this.props.finalgroup.finalx
+      }
+      if(data.x>this.props.finalgroup.finalx+(this.props.selection.width/2)-5 && data.x<this.props.finalgroup.finalx+(this.props.selection.width/2)+5){
+        xdata=this.props.finalgroup.finalx+(this.props.selection.width/2)
+        ydata=data.y
+        leftv=true
+        leftx=this.props.finalgroup.finalx+(this.props.selection.width/2)
+      }
+      if(data.x>this.props.finalgroup.finalx+this.props.selection.width-5 && data.x<this.props.finalgroup.finalx+this.props.selection.width+5){
+        xdata=this.props.finalgroup.finalx+(this.props.selection.width)
+        ydata=data.y
+        leftv=true
+        leftx=this.props.finalgroup.finalx+(this.props.selection.width)
+      }      
+    }
       var axis="both"
       if(leftv===true || centerv===true || rightv===true){
         axis="none"
@@ -240,7 +285,7 @@ var Dragabble=ComposedComponent => class  extends Component{
           axis:axis
           
         }) 
-        
+      console.log(rightv,rightx)
       this.props.showlines(leftv,centerv,rightv,leftx,centerx,rightx)
       
 }
@@ -305,7 +350,7 @@ var Dragabble=ComposedComponent => class  extends Component{
       };
       // console.log(this.props.groupoffset)
       if(this.props.group.includes(this.props.id) && this.props.group.length>=2){
-        console.log(this.props.groupoffset)
+        // console.log(this.props.groupoffset)
         position={
           x:this.props.groupoffset[this.props.id].x,
           y:this.props.groupoffset[this.props.id].y
@@ -315,7 +360,7 @@ var Dragabble=ComposedComponent => class  extends Component{
       //   // console.log("equalrqqequalrquall")
       //   // console.log(this.props.elements)
       //   // console.log(this.props.selection)
-      //   var tempx=(this.state.x-this.props.selection.groupx)//+(this.props.finalgroup.finalx)//-this.props.selection.groupx)
+      //   var tempx=(this.state.x-this.props.finalgroup.finalx)//+(this.props.finalgroup.finalx)//-this.props.finalgroup.finalx)
        
       //   var tempy=(this.state.y-this.props.selection.groupy)//+(this.props.finalgroup.finaly)//-this.props.selection.groupy)
        
@@ -326,7 +371,7 @@ var Dragabble=ComposedComponent => class  extends Component{
         
         
       // }
-      // if(this.props.group.includes(this.props.id)===true && (this.props.selection.groupx===this.props.groupprevpos.x || this.props.selection.groupy===this.props.groupprevpos.y) && this.props.group.length>2 ){
+      // if(this.props.group.includes(this.props.id)===true && (this.props.finalgroup.finalx===this.props.groupprevpos.x || this.props.selection.groupy===this.props.groupprevpos.y) && this.props.group.length>2 ){
       //  console.log("equalrqqequalrquall")
       //  console.log(this.props.elements)
       //  console.log(this.props.groupprevpos)
@@ -334,7 +379,7 @@ var Dragabble=ComposedComponent => class  extends Component{
        
       //   if(this.props.group[this.props.group.length-1]!=this.props.id ){
 
-      //   var tempx=(this.state.x-this.props.groupprevpos.x)+(this.props.groupprevpos.x-this.props.groupinit.x)//+(this.props.finalgroup.finalx)//-this.props.selection.groupx)
+      //   var tempx=(this.state.x-this.props.groupprevpos.x)+(this.props.groupprevpos.x-this.props.groupinit.x)//+(this.props.finalgroup.finalx)//-this.props.finalgroup.finalx)
        
       //   var tempy=(this.state.y-this.props.groupprevpos.y)+(this.props.groupprevpos.y-this.props.groupinit.y)//+(this.props.finalgroup.finaly)//-this.props.selection.groupy)
        
